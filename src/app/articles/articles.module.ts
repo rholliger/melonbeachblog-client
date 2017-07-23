@@ -3,6 +3,9 @@ import { CommonModule } from '@angular/common';
 
 import { ArticlesComponent } from './articles.component';
 import { ArticlesRoutingModule } from './articles-routing.module';
+import { ArticlesListComponent } from './articles-list/articles-list.component';
+import { ArticleItemComponent } from './article-item/article-item.component';
+import { ArticleService } from './article.service';
 
 @NgModule({
     imports: [
@@ -10,8 +13,11 @@ import { ArticlesRoutingModule } from './articles-routing.module';
         ArticlesRoutingModule
     ],
     declarations: [
-        ArticlesComponent
+        ArticlesComponent,
+        ArticlesListComponent,
+        ArticleItemComponent
     ],
+    providers: [ArticleService],
     exports: [
         ArticlesRoutingModule
     ]
