@@ -1,0 +1,28 @@
+<div class="sidebar">
+  <div class="logo-container">
+    <a routerLink="">
+      <div class="logo"></div>
+    </a>
+  </div>
+  <nav>
+    <ul>
+      <li #articlesLink routerLinkActive="active">
+        <a routerLink="articles">
+          <span class="glyphicon glyphicon-edit"></span>
+          <span>Articles</span>
+        </a>
+        <span class="right-edge" *ngIf="articlesLink.classList.contains('active')"></span>
+      </li>
+      <li #mediaLink routerLinkActive="active">
+        <a routerLink="media">
+          <span class="glyphicon glyphicon-picture"></span>
+          <span>Media</span>
+        </a>
+        <span class="right-edge" *ngIf="mediaLink.classList.contains('active')"></span>
+      </li>
+      <!-- <li>
+        <a href="">Settings</a>
+      </li> -->
+    </ul>
+  </nav>
+</div>
