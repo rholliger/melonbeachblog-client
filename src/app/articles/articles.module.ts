@@ -6,6 +6,7 @@ import { ArticlesRoutingModule } from './articles-routing.module';
 import { ArticlesListComponent } from './articles-list/articles-list.component';
 import { ArticleItemComponent } from './article-item/article-item.component';
 import { ArticleService } from './article.service';
+import { ToggleButtonComponent } from './toggle-button/toggle-button.component';
 
 @NgModule({
     imports: [
@@ -15,7 +16,8 @@ import { ArticleService } from './article.service';
     declarations: [
         ArticlesComponent,
         ArticlesListComponent,
-        ArticleItemComponent
+        ArticleItemComponent,
+        ToggleButtonComponent
     ],
     providers: [ArticleService],
     exports: [

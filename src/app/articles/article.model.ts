@@ -1,5 +1,5 @@
 export class Article {
-    public id: number;
+    public _id: string;
     public title: string;
     public slug: string;
     public category: string;

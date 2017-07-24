@@ -1,0 +1,36 @@
+@import "../../../shared_styles/variables";
+
+.list {
+    margin-bottom: 12px;
+    border-bottom: 1px solid $lightGrey;
+
+    table {
+        width: 100%;
+
+        thead {
+            background-color: $green;
+
+            tr {
+                border-bottom: 2px solid $darkGreen;
+
+                th {
+                    text-align: left;
+                    padding: 6px 20px;
+                    color: $darkGreen;
+                }
+            }
+        }
+
+        tbody {
+            background-color: $white;
+
+            tr {
+                border-bottom: 1px solid $lighterGrey;
+
+                &:hover {
+                    background-color: #F9F9F9;
+                }
+            }
+        }
+    }
+}

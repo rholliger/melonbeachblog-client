@@ -1,5 +1,18 @@
-<td>{{ article.active }}</td>
-<td>{{ article.createdDate }}</td>
-<td>{{ article.category }}</td>
+<td>
+    <app-toggle-button
+        [articleId]="article._id"
+        [isChecked]="article.active"
+        (change)="onClickToggleActiveState($event)">
+    </app-toggle-button>
+</td>
+<td>{{ article.createdDate | date:"dd.MM.y H:mm" }} Uhr</td>
+<td>{{ article.category | titlecase }}</td>
 <td>{{ article.title }}</td>
-<td></td>
+<td>
+    <a class="edit">
+        <span class="glyphicon glyphicon-pencil"></span>
+    </a>
+    <a class="delete">
+        <span class="glyphicon glyphicon-remove"></span>
+    </a>
+</td>

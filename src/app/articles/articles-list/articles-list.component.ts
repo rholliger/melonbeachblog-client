@@ -10,22 +10,18 @@ import { ArticleService } from '../article.service';
 })
 export class ArticlesListComponent implements OnInit {
   articles: Article[] = [];
-  testArticles: Article[] = [];
 
   constructor(private articleService: ArticleService) { }
 
   ngOnInit() {
-    const firstArticle = new Article('Erster Artikel', 'hallo-welt', 'news', 'blablabla', new Date(), true);
-    const secondArticle = new Article('Zweiter Artikel', 'hallo-welt', 'news', 'blablabla', new Date(), true);
+    // this.articles = this.articleService.getArticles();
+    this.articleService.fetchArticles();
 
-    this.testArticles.push(firstArticle);
-    this.testArticles.push(secondArticle);
-
-    this.articleService.setArticles(this.testArticles);
-
-    this.articles = this.articleService.getArticles();
-
-    this.articleService.getArticlesFromAServer();
+    this.articleService.articlesChanged.subscribe(
+      (articles: Article[]) => {
+        this.articles = articles;
+      }
+    );
   }
 
 }
