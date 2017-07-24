@@ -4,7 +4,6 @@ export class Article {
     public slug: string;
     public category: string;
     public content: string;
-    public createdDate: Date;
     public active: boolean;
 
     constructor(
@@ -12,14 +11,12 @@ export class Article {
         slug: string,
         category: string,
         content: string,
-        createdDate: Date,
-        active: boolean
+        active?: boolean
     ) {
         this.title = title;
         this.slug = slug;
         this.category = category;
         this.content = content;
-        this.createdDate = createdDate;
         this.active = active;
     }
 }

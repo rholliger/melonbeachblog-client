@@ -24,11 +24,16 @@ export class ArticleService {
         this.articlesChanged.next(this.articles.slice());
     }
 
+    removeArticle(articleId: string) {
+        const index = this.articles.findIndex((el) => el._id === articleId);
+        this.articles.splice(index, 1);
+        this.articlesChanged.next(this.articles.slice());
+    }
+
     fetchArticles() {
         this.http.get('http://localhost:3000/api/articles').subscribe(
             (response: Response) => {
                 const articles = response.json();
-                console.log(articles);
                 this.articles = articles;
                 this.articlesChanged.next(this.articles.slice());
             }
@@ -36,13 +41,30 @@ export class ArticleService {
     }
 
     changeActiveState(articleId: string, isActive: boolean) {
-        console.log('adsdasdd', articleId, isActive);
         this.http.put('http://localhost:3000/api/articles/'+articleId+'/active', {
             active: isActive
         }).subscribe(
             (response: Response) => {
                 const article = response.json();
                 this.udpateArticle(articleId, article);
+            }
+        );
+    }
+
+    createArticle(article: Article) {
+        const data = {
+            title: article.title,
+            slug: article.slug,
+            category: article.category,
+            content: article.content
+        };
+        return this.http.post('http://localhost:3000/api/articles', data);
+    }
+
+    deleteArticle(articleId: string) {
+        this.http.delete('http://localhost:3000/api/articles/' + articleId).subscribe(
+            (response: Response) => {
+                this.removeArticle(articleId);
             }
         );
     }

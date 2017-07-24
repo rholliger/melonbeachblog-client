@@ -20,7 +20,8 @@
       "prefix": "app",
       "styles": [
         "styles.scss",
-        "../node_modules/bootstrap/dist/css/bootstrap.css"
+        "../node_modules/bootstrap/dist/css/bootstrap.css",
+        "../node_modules/sweetalert2/dist/sweetalert2.css"
       ],
       "scripts": [],
       "environmentSource": "environments/environment.ts",

@@ -1,6 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
+import swal from 'sweetalert2';
+
 import { Article } from '../article.model';
 import { ArticleService } from '../article.service';
+import { MessagingService } from '../../core/messaging.service';
+
 
 @Component({
   selector: '[app-article-item]',
@@ -10,7 +14,7 @@ import { ArticleService } from '../article.service';
 export class ArticleItemComponent implements OnInit {
   @Input() article: Article;
 
-  constructor(private articleService: ArticleService) { }
+  constructor(private articleService: ArticleService, private messagingService: MessagingService) { }
 
   ngOnInit() {
   }
@@ -19,4 +23,9 @@ export class ArticleItemComponent implements OnInit {
     this.articleService.changeActiveState(this.article._id, event.target.checked);
   }
 
+  onDeleteArticle() {
+    this.messagingService.warning('Delete this Article?', 'Do you really want to delete this article?')
+      .then(() => this.articleService.deleteArticle(this.article._id))
+      .catch(() => null);
+  }
 }
