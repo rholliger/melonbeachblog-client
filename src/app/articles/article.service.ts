@@ -19,7 +19,11 @@ export class ArticleService {
         return this.articles.slice();
     }
 
-    udpateArticle(articleId: string, article: Article) {
+    getArticle(articleId: string) {
+        return this.articles.find((el) => el._id === articleId);
+    }
+
+    changeArticle(articleId: string, article: Article) {
         this.articles[articleId] = article;
         this.articlesChanged.next(this.articles.slice());
     }
@@ -40,13 +44,17 @@ export class ArticleService {
         )
     }
 
+    fetchArticle(articleId: string) {
+        return this.http.get('http://localhost:3000/api/articles/' + articleId);
+    }
+
     changeActiveState(articleId: string, isActive: boolean) {
-        this.http.put('http://localhost:3000/api/articles/'+articleId+'/active', {
+        this.http.put('http://localhost:3000/api/articles/' + articleId + '/active', {
             active: isActive
         }).subscribe(
             (response: Response) => {
                 const article = response.json();
-                this.udpateArticle(articleId, article);
+                this.changeArticle(articleId, article);
             }
         );
     }
@@ -69,7 +77,7 @@ export class ArticleService {
         );
     }
 
-    // Add article
-    // Edit article
-    // Delete article
+    updateArticle(articleId: string, article: Article) {
+        return this.http.put('http://localhost:3000/api/articles/' + articleId, article);
+    }
 }

@@ -1,5 +1,5 @@
 <div class="creation">
-  <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+  <form *ngIf="article" (ngSubmit)="onSubmit(f)" #f="ngForm">
 
     <label for="title">Title</label>
     <input
@@ -7,7 +7,7 @@
       id="title"
       name="title"
       placeholder="Enter a title"
-      ngModel
+      [(ngModel)]="article.title"
       required>
 
     <label for="slug">Slug</label>
@@ -16,31 +16,35 @@
       id="slug"
       name="slug"
       placeholder="Enter a slug"
-      ngModel>
+      [(ngModel)]="article.slug">
 
-    <label for="category">Category</label>
+     <label for="category">Category</label>
     <select
       id="category"
       name="category"
-      ngModel
+      [(ngModel)]="article.category"
     >
       <option selected disabled>Choose an option</option>
       <option value="news">News</option>
       <option value="gaming">Gaming</option>
-    </select>
+    </select> 
 
     <label for="content">Content</label>
     <textarea
       id="content"
       name="content"
       cols="20"
-      ngModel
+      [(ngModel)]="article.content"
       required>
     </textarea>
 
     <div class="button-group pull-right">
       <input type="button" class="button cancel" value="Cancel" (click)="onCancel()">
-      <input type="submit" class="button submit" value="Create" [disabled]="f.invalid">
+      <input
+        type="submit"
+        class="button confirm"
+        [value]="(this.editMode) ? 'Save' : 'Create'"
+        [disabled]="f.invalid">
     </div>
     <div class="clearfix"></div>
   </form>

@@ -9,7 +9,7 @@
 <td>{{ article.category | titlecase }}</td>
 <td>{{ article.title }}</td>
 <td>
-    <a class="edit">
+    <a class="edit" (click)="onEditArticle()">
         <span class="glyphicon glyphicon-pencil"></span>
     </a>
     <a class="delete" (click)="onDeleteArticle()">

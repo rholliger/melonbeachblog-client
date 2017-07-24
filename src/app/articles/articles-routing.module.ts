@@ -9,7 +9,8 @@ import { ArticleTestGuard } from './article-test-guard.service';
 const articlesRoutes: Routes = [
     { path: 'articles', component: ArticlesComponent, children: [
         { path: '', component: ArticlesListComponent },
-        { path: 'new', component: ArticleCreationComponent, /*canDeactivate: [ArticleTestGuard]*/ }
+        { path: 'new', component: ArticleCreationComponent, /*canDeactivate: [ArticleTestGuard]*/ },
+        { path: 'edit/:id', component: ArticleCreationComponent }
     ] }
 ]
 

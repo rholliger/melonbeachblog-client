@@ -1,10 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 import swal from 'sweetalert2';
 
 import { Article } from '../article.model';
 import { ArticleService } from '../article.service';
 import { MessagingService } from '../../core/messaging.service';
-
 
 @Component({
   selector: '[app-article-item]',
@@ -14,7 +14,11 @@ import { MessagingService } from '../../core/messaging.service';
 export class ArticleItemComponent implements OnInit {
   @Input() article: Article;
 
-  constructor(private articleService: ArticleService, private messagingService: MessagingService) { }
+  constructor(
+    private articleService: ArticleService,
+    private messagingService: MessagingService,
+    private route: ActivatedRoute,
+    private router: Router) { }
 
   ngOnInit() {
   }
@@ -27,5 +31,10 @@ export class ArticleItemComponent implements OnInit {
     this.messagingService.warning('Delete this Article?', 'Do you really want to delete this article?')
       .then(() => this.articleService.deleteArticle(this.article._id))
       .catch(() => null);
+  }
+
+  onEditArticle() {
+    // Go to the edit route
+    this.router.navigate(['edit', this.article._id], { relativeTo: this.route });
   }
 }
