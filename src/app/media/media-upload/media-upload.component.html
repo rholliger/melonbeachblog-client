@@ -1,0 +1,39 @@
+<app-page-header title="Upload Media"></app-page-header>
+<div class="upload">
+  <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+    <div
+      id="dropzone"
+      (drop)="onDrop($event)"
+      (dragover)="onDragOver($event)"
+      (dragleave)="onDragLeave($event)"
+      [class.dragged-over]="isDraggedOver">
+      <div class="upload-button-container">
+        <label for="upload-button">
+          <span>
+            <span class="glyphicon glyphicon-cloud-upload">
+              <br>
+              Upload
+            </span>
+          </span>
+        </label>
+        <input
+          type="file"
+          id="upload-button"
+          name="mediaUpload"
+          placeholder="Upload a file"
+          (change)="onUpload($event)">
+        <p class="info">{{ name }}</p>
+      </div>
+    </div>
+
+    <div class="button-group pull-right">
+      <input type="button" class="button cancel" value="Cancel" [routerLink]="['../']">
+      <input
+        type="submit"
+        class="button confirm"
+        value="Upload"
+        [disabled]="f.invalid">
+    </div>
+    <div class="clearfix"></div>
+  </form>
+</div>
