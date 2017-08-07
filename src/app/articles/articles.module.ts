@@ -7,7 +7,6 @@ import { ArticlesRoutingModule } from './articles-routing.module';
 import { ArticlesListComponent } from './articles-list/articles-list.component';
 import { ArticleItemComponent } from './article-item/article-item.component';
 import { ArticleService } from './article.service';
-import { ToggleButtonComponent } from './toggle-button/toggle-button.component';
 import { ArticleCreationComponent } from './article-creation/article-creation.component';
 import { ArticleTestGuard } from './article-test-guard.service';
 import { SharedModule } from "../shared/shared.module";
@@ -23,7 +22,6 @@ import { SharedModule } from "../shared/shared.module";
         ArticlesComponent,
         ArticlesListComponent,
         ArticleItemComponent,
-        ToggleButtonComponent,
         ArticleCreationComponent
     ],
     providers: [ArticleService, ArticleTestGuard],

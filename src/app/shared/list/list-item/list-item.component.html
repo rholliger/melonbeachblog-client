@@ -1,4 +1,25 @@
 <span [ngSwitch]="type">
-    <span *ngSwitchCase="'date'">{{ content | date }}</span>
+    <span *ngSwitchCase="'toggle'">
+        <app-toggle-button
+            [articleId]="id"
+            [isChecked]="content">
+        </app-toggle-button>
+    </span>
+    <span *ngSwitchCase="'date'">{{ content | date:"dd.MM.y H:mm" }}</span>
+    <span *ngSwitchCase="'titlecase'">{{ content | titlecase }}</span>
+    <span *ngSwitchCase="'buttons'">
+        <a *ngIf="content.includes('edit')"
+            class="icon edit"
+            (click)="onClickedEdit()"
+            style="cursor: pointer">
+            <span class="glyphicon glyphicon-pencil"></span>
+        </a>
+        <a *ngIf="content.includes('delete')"
+            class="icon delete"
+            (click)="onClickedDelete()"
+            style="cursor: pointer">
+            <span class="glyphicon glyphicon-remove"></span>
+        </a>
+    </span>
     <span *ngSwitchDefault>{{ content }}</span>
 </span>

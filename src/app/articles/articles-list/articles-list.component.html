@@ -20,7 +20,7 @@
   [headerColumns]="['Active', 'Date', 'Category', 'Title', '']"
   [rows]="[
   {
-    type: 'string',
+    type: 'toggle',
     content: 'active'
   },
   {
@@ -28,7 +28,7 @@
     content: 'createdDate'
   },
   {
-    type: 'string',
+    type: 'titlecase',
     content: 'category'
   },
   {
@@ -36,7 +36,8 @@
     content: 'title'
   },
   {
-    type: 'string'
+    type: 'buttons',
+    data: ['edit', 'delete']
   }]"
   [data]="articles"
 ></app-list>

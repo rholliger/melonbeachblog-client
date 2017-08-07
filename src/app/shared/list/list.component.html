@@ -11,7 +11,8 @@
           app-list-item
           *ngFor="let column of rows"
           [type]="column.type"
-          [content]="row[column.content]">
+          [content]="column.content ? row[column.content] : column.data"
+          [id]="row._id">
         </td>
       </tr>
     </tbody>

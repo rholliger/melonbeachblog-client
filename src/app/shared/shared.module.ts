@@ -5,6 +5,8 @@ import { ListComponent } from './list/list.component';
 import { PageHeaderComponent } from "./page-header.component";
 import { AppRoutingModule } from "../app-routing.module";
 import { ListItemComponent } from './list/list-item/list-item.component';
+import { ToggleButtonComponent } from "./toggle-button/toggle-button.component";
+import { SharedService } from "./shared.service";
 
 @NgModule({
     imports: [
@@ -14,8 +16,10 @@ import { ListItemComponent } from './list/list-item/list-item.component';
     declarations: [
         ListComponent,
         PageHeaderComponent,
-        ListItemComponent
+        ListItemComponent,
+        ToggleButtonComponent
     ],
+    providers: [SharedService],
     exports: [
         ListComponent,
         PageHeaderComponent

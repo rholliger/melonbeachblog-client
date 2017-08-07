@@ -14,6 +14,6 @@ export class ListComponent implements OnInit {
     }
 
     ngOnChanges() {
-        console.log('Hallo Change', this.headerColumns, this.rows, this.data);
+        // console.log('Hallo Change', this.headerColumns, this.rows, this.data);
     }
 }

@@ -2,5 +2,6 @@
   class="toggle"
   type="checkbox"
   [id]="articleId"
-  [checked]="isChecked">
+  [checked]="isChecked"
+  (change)="onToggle($event)">
 <label [for]="articleId"></label>

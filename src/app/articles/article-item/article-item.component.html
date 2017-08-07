@@ -1,9 +1,5 @@
 <td>
-    <app-toggle-button
-        [articleId]="article._id"
-        [isChecked]="article.active"
-        (change)="onClickToggleActiveState($event)">
-    </app-toggle-button>
+
 </td>
 <td>{{ article.createdDate | date:"dd.MM.y H:mm" }} Uhr</td>
 <td>{{ article.category | titlecase }}</td>

@@ -1,3 +1,26 @@
 <app-list
-  [headerColumns]="['Date', 'Preview', 'Name', 'Description']"
+  [headerColumns]="['Date', 'Preview', 'Name', 'Description', '']"
+  [rows]="[
+    {
+      type: 'date',
+      content: 'date'
+    },
+    {
+      type: 'string',
+      content: 'preview'
+    },
+    {
+      type: 'string',
+      content: 'name'
+    },
+    {
+      type: 'string',
+      content: 'description'
+    },
+    {
+      type: 'buttons',
+      data: ['delete']
+    }
+  ]"
+  [data]="media"
 ></app-list>
