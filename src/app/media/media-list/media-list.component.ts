@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SharedService } from "../../shared/shared.service";
+import { ListService } from "../../shared/list/list.service";
 
 @Component({
   selector: 'app-media-list',
@@ -38,10 +38,10 @@ export class MediaListComponent implements OnInit {
     }
   ]
 
-  constructor(private sharedService: SharedService) { }
+  constructor(private listService: ListService) { }
 
   ngOnInit() {
-    this.sharedService.clickedDeleteButton.subscribe(
+    this.listService.clickedDeleteButton.subscribe(
       (id: string) => this.media.splice(parseInt(id, 10), 1)
     )
   }

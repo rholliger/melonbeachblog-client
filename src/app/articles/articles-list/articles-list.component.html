@@ -1,21 +1,4 @@
 <app-page-header title="Articles" hasNewLink="true"></app-page-header>
-<!-- <div class="list">
-  <table>
-    <thead>
-      <tr>
-        <th>Active</th>
-        <th>Date</th>
-        <th>Category</th>
-        <th>Title</th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-       <tr app-article-item *ngFor="let article of articles" [article]="article"></tr> 
-    </tbody>
-  </table>
-</div> -->
-
 <app-list
   [headerColumns]="['Active', 'Date', 'Category', 'Title', '']"
   [rows]="[

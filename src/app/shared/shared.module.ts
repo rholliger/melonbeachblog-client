@@ -7,6 +7,7 @@ import { AppRoutingModule } from "../app-routing.module";
 import { ListItemComponent } from './list/list-item/list-item.component';
 import { ToggleButtonComponent } from "./toggle-button/toggle-button.component";
 import { SharedService } from "./shared.service";
+import { ListService } from "./list/list.service";
 
 @NgModule({
     imports: [
@@ -19,7 +20,7 @@ import { SharedService } from "./shared.service";
         ListItemComponent,
         ToggleButtonComponent
     ],
-    providers: [SharedService],
+    providers: [SharedService, ListService],
     exports: [
         ListComponent,
         PageHeaderComponent

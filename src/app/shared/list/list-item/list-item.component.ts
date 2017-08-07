@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { SharedService } from "../../shared.service";
+import { ListService } from "../list.service";
 
 @Component({
   selector: '[app-list-item]',
@@ -11,17 +11,17 @@ export class ListItemComponent implements OnInit {
   @Input() content: any;
   @Input() id: string;
   
-  constructor(private sharedService: SharedService) { }
+  constructor(private listService: ListService) { }
 
   ngOnInit() {
   }
 
   onClickedEdit() {
-    this.sharedService.clickedEditButton.next(this.id);
+    this.listService.clickedEditButton.next(this.id);
   }
 
   onClickedDelete() {
-    this.sharedService.clickedDeleteButton.next(this.id);
+    this.listService.clickedDeleteButton.next(this.id);
   }
 
 }
