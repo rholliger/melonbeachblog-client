@@ -7,22 +7,35 @@
       (dragover)="onDragOver($event)"
       (dragleave)="onDragLeave($event)"
       [class.dragged-over]="isDraggedOver">
-      <div class="upload-button-container">
-        <label for="upload-button">
-          <span>
-            <span class="glyphicon glyphicon-cloud-upload">
-              <br>
-              Upload
+      <div class="upload-info-container">
+        <div class="upload-button-container">
+          <label for="upload-button">
+            <span>
+              <span class="glyphicon glyphicon-cloud-upload">
+                <br>
+                Upload
+              </span>
             </span>
-          </span>
-        </label>
-        <input
-          type="file"
-          id="upload-button"
-          name="mediaUpload"
-          placeholder="Upload a file"
-          (change)="onUpload($event)">
+          </label>
+          <input
+            type="file"
+            id="upload-button"
+            name="mediaUpload"
+            placeholder="Upload a file"
+            (change)="onUpload($event)">
+        </div>
         <p class="info">{{ name }}</p>
+        <table class="file-list">
+          <tr *ngFor="let file of files; let i = index">
+            <td>{{ file.name }}</td>
+            <td>{{ file.size | fileSize:"MB" }}</td>
+            <td>
+              <a style="cursor: pointer" (click)="onRemoveFile(i)">
+                <span class="glyphicon glyphicon-remove"></span>
+              </a>
+            </td>
+          </tr>
+        </table>
       </div>
     </div>
 

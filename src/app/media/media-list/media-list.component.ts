@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Subscription } from "rxjs/Subscription";
+
 import { ListService } from "../../shared/list/list.service";
 import { MediaService } from "../media.service";
 import { Media } from "../media.model";
@@ -8,8 +10,9 @@ import { Media } from "../media.model";
   templateUrl: './media-list.component.html',
   styleUrls: ['./media-list.component.scss']
 })
-export class MediaListComponent implements OnInit {
+export class MediaListComponent implements OnInit, OnDestroy {
   media: Media[] = [];
+  clickedDeleteSubscription: Subscription;
 
   constructor(private mediaService: MediaService, private listService: ListService) { }
 
@@ -20,8 +23,12 @@ export class MediaListComponent implements OnInit {
       (media: Media[]) => this.media = media
     )
 
-    this.listService.clickedDeleteButton.subscribe(
+    this.clickedDeleteSubscription = this.listService.clickedDeleteButton.subscribe(
       (id: string) => this.mediaService.deleteMedia(id)
     )
+  }
+
+  ngOnDestroy() {
+    this.clickedDeleteSubscription.unsubscribe();
   }
 }

@@ -34,6 +34,16 @@ export class MediaService {
         )
     }
 
+    uploadMedia(files: any[]) {
+        const formData = new FormData();
+
+        for(let i = 0; i < files.length; i++) {
+            formData.append('mediaUpload', files[i]);
+        }
+
+        return this.http.post(config.apiUrl + '/media', formData);
+    }
+
     // FetchMedia
     // fetchArticle(articleId: string) {
     //     return this.http.get(config.apiUrl + '/articles/' + articleId);

@@ -3,25 +3,29 @@ import { NgForm } from "@angular/forms";
 import { Http } from "@angular/http";
 import { ActivatedRoute, Router } from "@angular/router";
 
+import { MediaService } from "../media.service";
+
 @Component({
   selector: 'app-media-upload',
   templateUrl: './media-upload.component.html',
   styleUrls: ['./media-upload.component.scss']
 })
 export class MediaUploadComponent implements OnInit {
-  file: any;
+  files: any[];
   name: string = 'or drop the files here';
   isDraggedOver: boolean = false;
 
-  constructor(private http: Http, private router: Router, private route: ActivatedRoute) { }
+  constructor(
+    private http: Http,
+    private router: Router,
+    private route: ActivatedRoute,
+    private mediaService: MediaService) { }
 
   ngOnInit() {
   }
 
   onUpload(event: any) {
-    this.file = event.target.files[0];
-    this.name = this.file.name;
-    console.log('upload file', this.file.name);
+    this.files = event.target.files;
   }
 
   onDragOver(event: any) {
@@ -40,21 +44,25 @@ export class MediaUploadComponent implements OnInit {
   onDrop(event: any) {
     event.preventDefault();
     this.isDraggedOver = false;
+    
+    this.files = event.dataTransfer.files;
+    // this.name = this.file.name;
+  }
 
-    this.file = event.dataTransfer.files[0];
-    this.name = this.file.name;
+  onRemoveFile(index: number) {
+    // this.files = this.files.splice(index, 1);
+    const blabla = Array.from(this.files);
+    blabla.splice(index, 1);
+    this.files = blabla;
+    console.log('on remove file', blabla);
   }
 
   onSubmit(form: NgForm) {
-    console.log('clicked submit with file', this.file.fileName);
+    console.log(this.files);
 
-    const formData = new FormData();
-
-    formData.append('mediaUpload', this.file);
-
-    this.http.post('http://localhost:3000/api/media', formData).subscribe(
+    this.mediaService.uploadMedia(this.files).subscribe(
       () => this.router.navigate(['../'], { relativeTo: this.route })
-    )
+    );
   }
 
 }

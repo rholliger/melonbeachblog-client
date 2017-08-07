@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
 
 import { Article } from '../article.model';
@@ -6,14 +6,16 @@ import { ArticleService } from '../article.service';
 import { SharedService } from "../../shared/shared.service";
 import { MessagingService } from "../../core/messaging.service";
 import { ListService } from "../../shared/list/list.service";
+import { Subscription } from "rxjs/Subscription";
 
 @Component({
   selector: 'app-articles-list',
   templateUrl: './articles-list.component.html',
   styleUrls: ['./articles-list.component.scss']
 })
-export class ArticlesListComponent implements OnInit {
+export class ArticlesListComponent implements OnInit, OnDestroy {
   articles: Article[] = [];
+  clickedDeleteSubscription: Subscription;
 
   constructor(
     private articleService: ArticleService,
@@ -43,13 +45,13 @@ export class ArticlesListComponent implements OnInit {
       (id: string) => this.router.navigate(['edit', id], { relativeTo: this.route })
     )
 
-    this.listService.clickedDeleteButton.subscribe(
-      (id: string) => {
-        this.messagingService.warning('Delete this Article?', 'Do you really want to delete this article?')
-          .then(() => this.articleService.deleteArticle(id))
-          .catch(() => null);
-      }
+    this.clickedDeleteSubscription = this.listService.clickedDeleteButton.subscribe(
+      (id: string) => this.articleService.deleteArticle(id)
     )
+  }
+
+  ngOnDestroy() {
+    this.clickedDeleteSubscription.unsubscribe();
   }
 
 }

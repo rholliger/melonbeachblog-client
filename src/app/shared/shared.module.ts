@@ -8,6 +8,7 @@ import { ListItemComponent } from './list/list-item/list-item.component';
 import { ToggleButtonComponent } from "./toggle-button/toggle-button.component";
 import { SharedService } from "./shared.service";
 import { ListService } from "./list/list.service";
+import { FileSizePipe } from "./file-size.pipe";
 
 @NgModule({
     imports: [
@@ -18,12 +19,14 @@ import { ListService } from "./list/list.service";
         ListComponent,
         PageHeaderComponent,
         ListItemComponent,
-        ToggleButtonComponent
+        ToggleButtonComponent,
+        FileSizePipe
     ],
     providers: [SharedService, ListService],
     exports: [
         ListComponent,
-        PageHeaderComponent
+        PageHeaderComponent,
+        FileSizePipe
     ]
 })
 export class SharedModule {}
