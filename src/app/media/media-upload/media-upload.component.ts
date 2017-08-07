@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from "@angular/forms";
 import { Http } from "@angular/http";
+import { ActivatedRoute, Router } from "@angular/router";
 
 @Component({
   selector: 'app-media-upload',
@@ -12,7 +13,7 @@ export class MediaUploadComponent implements OnInit {
   name: string = 'or drop the files here';
   isDraggedOver: boolean = false;
 
-  constructor(private http: Http) { }
+  constructor(private http: Http, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
   }
@@ -52,7 +53,7 @@ export class MediaUploadComponent implements OnInit {
     formData.append('mediaUpload', this.file);
 
     this.http.post('http://localhost:3000/api/media', formData).subscribe(
-      () => console.log('uploaded')
+      () => this.router.navigate(['../'], { relativeTo: this.route })
     )
   }
 

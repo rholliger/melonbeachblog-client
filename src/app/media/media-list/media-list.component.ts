@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ListService } from "../../shared/list/list.service";
+import { MediaService } from "../media.service";
+import { Media } from "../media.model";
 
 @Component({
   selector: 'app-media-list',
@@ -7,43 +9,19 @@ import { ListService } from "../../shared/list/list.service";
   styleUrls: ['./media-list.component.scss']
 })
 export class MediaListComponent implements OnInit {
-  media: any[] = [
-    {
-      _id: "0",
-      date: new Date(),
-      preview: 'http://blabla.de',
-      name: 'Image 1',
-      description: 'This is the first image'
-    },
-    {
-      _id: "1",
-      date: new Date(),
-      preview: 'http://blabla.de',
-      name: 'Image 2',
-      description: 'This is the 2 image'
-    },
-    {
-      _id: "2",
-      date: new Date(),
-      preview: 'http://blabla.de',
-      name: 'Image 3',
-      description: 'This is the 3 image'
-    },
-    {
-      _id: "3",
-      date: new Date(),
-      preview: 'http://blabla.de',
-      name: 'Image 4',
-      description: 'This is the 4 image'
-    }
-  ]
+  media: Media[] = [];
 
-  constructor(private listService: ListService) { }
+  constructor(private mediaService: MediaService, private listService: ListService) { }
 
   ngOnInit() {
+    this.mediaService.fetchMedia();
+
+    this.mediaService.mediaChanged.subscribe(
+      (media: Media[]) => this.media = media
+    )
+
     this.listService.clickedDeleteButton.subscribe(
-      (id: string) => this.media.splice(parseInt(id, 10), 1)
+      (id: string) => this.mediaService.deleteMedia(id)
     )
   }
-
 }

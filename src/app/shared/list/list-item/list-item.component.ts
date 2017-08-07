@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ListService } from "../list.service";
+import { MessagingService } from "../../../core/messaging.service";
 
 @Component({
   selector: '[app-list-item]',
@@ -11,7 +12,7 @@ export class ListItemComponent implements OnInit {
   @Input() content: any;
   @Input() id: string;
   
-  constructor(private listService: ListService) { }
+  constructor(private listService: ListService, private messagingService: MessagingService) { }
 
   ngOnInit() {
   }
@@ -21,7 +22,9 @@ export class ListItemComponent implements OnInit {
   }
 
   onClickedDelete() {
-    this.listService.clickedDeleteButton.next(this.id);
+    this.messagingService.warning('Delete this Item?', 'Do you really want to delete this item?')
+        .then(() => this.listService.clickedDeleteButton.next(this.id))
+        .catch(() => null);
   }
 
 }
