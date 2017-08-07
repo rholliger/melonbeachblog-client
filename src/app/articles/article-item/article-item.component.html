@@ -9,10 +9,10 @@
 <td>{{ article.category | titlecase }}</td>
 <td>{{ article.title }}</td>
 <td>
-    <a class="edit" (click)="onEditArticle()">
+    <a class="icon edit" (click)="onEditArticle()" style="cursor: pointer">
         <span class="glyphicon glyphicon-pencil"></span>
     </a>
-    <a class="delete" (click)="onDeleteArticle()">
+    <a class="icon delete" (click)="onDeleteArticle()" style="cursor: pointer">
         <span class="glyphicon glyphicon-remove"></span>
     </a>
 </td>

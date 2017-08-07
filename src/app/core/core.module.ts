@@ -7,13 +7,15 @@ import { AppRoutingModule } from '../app-routing.module';
 import { ArticlesModule } from '../articles/articles.module';
 import { MediaModule } from '../media/media.module';
 import { MessagingService } from './messaging.service';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
     AppRoutingModule,
     ArticlesModule,
-    MediaModule
+    MediaModule,
+    SharedModule
   ],
   declarations: [
     HeaderComponent,

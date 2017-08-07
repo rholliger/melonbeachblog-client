@@ -1,8 +1,36 @@
 /* You can add global styles to this file, and also import other style files */
+@import "shared_styles/variables";
+
 html, body {
     height: 100%;
 
     a, a:hover, a:focus, a:visited {
         text-decoration: none;
+    }
+
+    a {
+        &.icon {
+            &:hover {
+                opacity: .8
+            }
+        }
+        
+        &.delete {
+            span {
+                color: $red;
+            }
+        }
+
+        &.new {
+            span {
+                color: $green;
+            }
+        }
+
+        &.edit {
+            span {
+                color: $blue;
+            }
+        }
     }
 }

@@ -1,4 +1,5 @@
-<div class="list">
+<app-page-header title="Articles" hasNewLink="true"></app-page-header>
+<!-- <div class="list">
   <table>
     <thead>
       <tr>
@@ -10,7 +11,32 @@
       </tr>
     </thead>
     <tbody>
-      <tr app-article-item *ngFor="let article of articles" [article]="article"></tr>
+       <tr app-article-item *ngFor="let article of articles" [article]="article"></tr> 
     </tbody>
   </table>
-</div>
+</div> -->
+
+<app-list
+  [headerColumns]="['Active', 'Date', 'Category', 'Title', '']"
+  [rows]="[
+  {
+    type: 'string',
+    content: 'active'
+  },
+  {
+    type: 'date',
+    content: 'createdDate'
+  },
+  {
+    type: 'string',
+    content: 'category'
+  },
+  {
+    type: 'string',
+    content: 'title'
+  },
+  {
+    type: 'string'
+  }]"
+  [data]="articles"
+></app-list>

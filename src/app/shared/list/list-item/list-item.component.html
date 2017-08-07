@@ -1,0 +1,4 @@
+<span [ngSwitch]="type">
+    <span *ngSwitchCase="'date'">{{ content | date }}</span>
+    <span *ngSwitchDefault>{{ content }}</span>
+</span>

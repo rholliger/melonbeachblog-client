@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Article } from './article.model';
 import { Subject } from "rxjs/Subject";
+import { environment as config } from '../../environments/environment';
 
 @Injectable()
 export class ArticleService {
@@ -35,7 +36,7 @@ export class ArticleService {
     }
 
     fetchArticles() {
-        this.http.get('http://localhost:3000/api/articles').subscribe(
+        this.http.get(config.apiUrl + '/articles').subscribe(
             (response: Response) => {
                 const articles = response.json();
                 this.articles = articles;
@@ -45,11 +46,11 @@ export class ArticleService {
     }
 
     fetchArticle(articleId: string) {
-        return this.http.get('http://localhost:3000/api/articles/' + articleId);
+        return this.http.get(config.apiUrl + '/articles/' + articleId);
     }
 
     changeActiveState(articleId: string, isActive: boolean) {
-        this.http.put('http://localhost:3000/api/articles/' + articleId + '/active', {
+        this.http.put(config.apiUrl + '/articles/' + articleId + '/active', {
             active: isActive
         }).subscribe(
             (response: Response) => {
@@ -66,11 +67,11 @@ export class ArticleService {
             category: article.category,
             content: article.content
         };
-        return this.http.post('http://localhost:3000/api/articles', data);
+        return this.http.post(config.apiUrl + '/articles', data);
     }
 
     deleteArticle(articleId: string) {
-        this.http.delete('http://localhost:3000/api/articles/' + articleId).subscribe(
+        this.http.delete(config.apiUrl + '/articles/' + articleId).subscribe(
             (response: Response) => {
                 this.removeArticle(articleId);
             }

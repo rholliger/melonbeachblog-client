@@ -4,6 +4,7 @@ export class Article {
     public slug: string;
     public category: string;
     public content: string;
+    public createdDate: Date;
     public active: boolean;
 
     constructor(

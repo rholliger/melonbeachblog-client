@@ -10,12 +10,14 @@ import { ArticleService } from './article.service';
 import { ToggleButtonComponent } from './toggle-button/toggle-button.component';
 import { ArticleCreationComponent } from './article-creation/article-creation.component';
 import { ArticleTestGuard } from './article-test-guard.service';
+import { SharedModule } from "../shared/shared.module";
 
 @NgModule({
     imports: [
         CommonModule,
         FormsModule,
-        ArticlesRoutingModule
+        ArticlesRoutingModule,
+        SharedModule
     ],
     declarations: [
         ArticlesComponent,

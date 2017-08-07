@@ -11,7 +11,7 @@ import { MessagingService } from '../../core/messaging.service';
 @Component({
   selector: 'app-article-creation',
   templateUrl: './article-creation.component.html',
-  styleUrls: ['./article-creation.component.scss']
+  styleUrls: ['../../../shared_styles/form.scss', './article-creation.component.scss']
 })
 export class ArticleCreationComponent implements OnInit {
   article: Article;
@@ -63,8 +63,9 @@ export class ArticleCreationComponent implements OnInit {
   }
 
   onCancel() {
-    this.messagingService.warning('Leave Route', 'Do you really want to leave the route?')
-      .then(() => this.navigateBackToTheList())
-      .catch(() => null);
+    // this.messagingService.warning('Leave Route', 'Do you really want to leave the route?')
+    //   .then(() => this.navigateBackToTheList())
+    //   .catch(() => null);
+    this.navigateBackToTheList();
   }
 }

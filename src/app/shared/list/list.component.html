@@ -1,0 +1,19 @@
+<div class="list">
+  <table>
+    <thead>
+      <tr>
+        <th *ngFor="let item of headerColumns">{{ item }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let row of data">
+        <td
+          app-list-item
+          *ngFor="let column of rows"
+          [type]="column.type"
+          [content]="row[column.content]">
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div> 
