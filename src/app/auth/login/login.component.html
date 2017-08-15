@@ -1,0 +1,31 @@
+<div id="login">
+  <div class="login-container">
+    <div class="logo-container">
+      <div class="logo"></div>
+    </div>
+    <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+      <div *ngIf="error" class="error">{{ error }}</div>
+      <input
+        type="email"
+        id="email"
+        name="email"
+        placeholder="E-Mail"
+        ngModel
+        required>
+
+      <input
+        type="password"
+        id="password"
+        name="password"
+        placeholder="Password"
+        ngModel
+        required>
+
+      <input
+        type="submit"
+        class="button confirm"
+        value="Login"
+        [disabled]="f.invalid">
+    </form>
+  </div>
+</div>

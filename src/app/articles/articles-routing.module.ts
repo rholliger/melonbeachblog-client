@@ -5,9 +5,10 @@ import { ArticlesComponent } from './articles.component';
 import { ArticlesListComponent } from './articles-list/articles-list.component';
 import { ArticleCreationComponent } from './article-creation/article-creation.component';
 import { ArticleTestGuard } from './article-test-guard.service';
+import { AuthGuard } from "../auth/auth.guard";
 
 const articlesRoutes: Routes = [
-    { path: 'articles', component: ArticlesComponent, children: [
+    { path: 'articles', component: ArticlesComponent, canActivate: [AuthGuard], children: [
         { path: '', component: ArticlesListComponent },
         { path: 'new', component: ArticleCreationComponent, /*canDeactivate: [ArticleTestGuard]*/ },
         { path: 'edit/:id', component: ArticleCreationComponent }

@@ -25,7 +25,9 @@
             background-color: $white;
 
             tr {
-                border-bottom: 1px solid $lighterGrey;
+                &:not(:last-child) {
+                    border-bottom: 1px solid $lighterGrey;
+                }
 
                 &:hover {
                     background-color: #F9F9F9;

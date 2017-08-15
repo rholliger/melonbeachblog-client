@@ -4,9 +4,10 @@ import { RouterModule, Routes } from '@angular/router';
 import { MediaComponent } from './media.component';
 import { MediaListComponent } from './media-list/media-list.component';
 import { MediaUploadComponent } from "./media-upload/media-upload.component";
+import { AuthGuard } from "../auth/auth.guard";
 
 const mediaRoutes: Routes = [
-    { path: 'media', component: MediaComponent, children: [
+    { path: 'media', component: MediaComponent, canActivate: [AuthGuard], children: [
         { path: '', component: MediaListComponent },
         { path: 'new', component: MediaUploadComponent }
     ] }

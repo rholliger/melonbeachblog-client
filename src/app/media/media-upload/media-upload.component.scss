@@ -1,11 +1,6 @@
 @import "../../../shared_styles/variables";
 
 .upload {
-    background-color: $white;
-    padding: 16px;
-    border-top: 2px solid $green;
-    border-bottom: 1px solid $lightGrey;
-
     #dropzone {
         width: 600px;
         // height: 300px;
@@ -37,22 +32,29 @@
                     height: 80px;
                     text-align: center;
                     cursor: pointer;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
 
-                    &:first-child {
-                        margin-right: 10px;
-                    }
+                    // &:first-child {
+                    //     margin-right: 10px;
+                    // }
 
                     &:hover {
-                        background-color: black;
+                        opacity: .8;
                     }
 
                     >span {
-                        position: relative;
                         color: white;
-                        top: 12px;
 
-                        span:first-child {
+                        &:first-child {
                             font-size: 30px;
+                            margin-right: 10px;
+                        }
+
+                        &:last-child {
+                            font-size: 16px;
+                            margin-top: 4px;
                         }
                     }
                 }

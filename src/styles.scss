@@ -1,8 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
 @import "shared_styles/variables";
+@import "shared_styles/fonts";
+@import "shared_styles/form";
 
 html, body {
     height: 100%;
+    background-color: $ultraLightGrey;
 
     a, a:hover, a:focus, a:visited {
         text-decoration: none;
@@ -38,7 +41,7 @@ html, body {
     input[type="submit"],
     button {
         border: 0px;
-        border-radius: 5px;
+        border-radius: 4px;
         padding: 8px;
         min-width: 100px;
         outline: 0;

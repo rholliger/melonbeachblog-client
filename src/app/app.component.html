@@ -1,14 +1,19 @@
 <div class="wrapper">
-  <app-header></app-header>
-  <app-sidebar></app-sidebar>
-  <div class="content">
-    <div class="container-fluid">
-      <div class="content-container">
-        <router-outlet></router-outlet>
-        <!-- <app-home></app-home>
-        <app-articles></app-articles>
-        <app-media></app-media> -->
+  <ng-template #loginWrapper>
+    <div class="login-wrapper">
+      <router-outlet></router-outlet>
+    </div>
+  </ng-template>
+
+  <div class="content-wrapper" *ngIf="isLoggedIn; else loginWrapper">
+    <app-header></app-header>
+    <app-sidebar></app-sidebar>
+    <div class="content">
+      <div class="container-fluid">
+        <div class="content-container">
+          <router-outlet></router-outlet>
+        </div>
       </div>
     </div>
   </div>
-</div>
+</div> 

@@ -1,6 +1,50 @@
 @import "variables.scss";
 
-// input[type="button"] {
-//     border-radius: 10px;
-//     background-color: $red;
-// }
+form {
+    background-color: white;
+    padding: 16px;
+    border-top: 2px solid $green;
+    border-bottom: 1px solid $bottomGrey;
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    textarea,
+    select {
+        margin: 5px 0 20px 0;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    textarea {
+        display: block;
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ccc;
+        background-color: white;
+        outline: 0;
+
+        &:focus {
+            border: 1px solid $darkGreen;
+            box-shadow: 0px 0px 2px $green;
+            transition: border 400ms ease-out, box-shadow 400ms ease-out;
+        }
+
+        &::placeholder {
+            color: $lightGrey;
+        }
+    }
+
+    .button-group {
+        display: flex;
+        width: 260px;
+        margin-top: 16px;
+
+        input[type="button"],
+        input[type="submit"] {
+            width: 50%;
+            margin: 0 0 0 6px;
+        }
+    }
+}

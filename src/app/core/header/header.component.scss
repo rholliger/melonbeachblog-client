@@ -4,3 +4,23 @@
     background-color: $green;
     border-bottom: 2px solid $darkGreen;
 }
+
+.logout {
+    padding: 0 15px;
+
+    a {
+        cursor: pointer;
+
+        span {
+            font-size: 30px;
+            line-height: 50px;
+            color: $darkGreen;
+        }
+
+        &:hover {
+            span {
+                opacity: .6;
+            }
+        }
+    }
+}
