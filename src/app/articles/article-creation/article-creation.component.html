@@ -2,6 +2,55 @@
 <div class="creation">
   <form *ngIf="article" (ngSubmit)="onSubmit(f)" #f="ngForm">
 
+    <label>Top Element</label>
+    <div class="media-buttons" [style.display]="showTopElement ? 'none' : 'flex'">
+      <app-button type="upload" (uploadStarted)="onUploadStarted()" (uploadDone)="onUploadDone($event)"></app-button>
+      <app-button type="icon-text" icon="cloud-upload" text="Choose" (click)="onOpenMediaSelector()"></app-button> 
+    </div>
+    <div class="media-container" *ngIf="showTopElement">
+      <div class="media">
+        <div class="buttons">
+          <span class="glyphicon glyphicon-remove" (click)="onRemoveTopElement()"></span>
+        </div>
+        <!-- <img src="http://localhost:3000/uploads/{{ topElementFileName }}" alt=""> -->
+        <img *ngIf="topElementMedia" src="http://localhost:3000/uploads/{{ topElementMedia.fileName }}">
+      </div>
+      <div class="media-info">
+        <input
+          type="text"
+          id="caption"
+          name="caption"
+          placeholder="Enter a caption"
+          [(ngModel)]="article.mediaElement.caption">
+      </div>
+    </div>
+
+    <div class="media-selector-container" *ngIf="showMediaSelector">
+      <div class="media-selector">
+        <div class="media-item"></div>
+        <div class="media-item"></div>
+        <div class="media-item"></div>
+        <div class="media-item"></div>
+        <div class="media-item"></div>
+        <div class="media-item"></div>
+        <div class="media-item"></div>
+        <div class="media-item"></div>
+        <div class="media-item"></div>
+        <div class="media-item"></div>
+        <div class="media-item"></div>
+        <div class="media-item"></div>
+        <div class="media-item"></div>
+        <div class="media-item"></div>
+        <div class="media-item"></div>
+        <div class="media-item"></div>
+        <div class="media-item"></div>
+        <div class="media-item"></div>
+        <div class="media-item"></div>
+        <div class="media-item"></div>
+        <div class="media-item"></div>
+      </div>
+    </div>
+
     <label for="title">Title</label>
     <input
       type="text"
@@ -31,13 +80,19 @@
     </select> 
 
     <label for="content">Content</label>
-    <textarea
+    <rich-text-editor
+      elementId="content"
+      name="content"
+      [content]="article.content"
+      (onEditorChange)="onEditorChanged($event)"
+      required
+    ></rich-text-editor>
+    <!-- <textarea
       id="content"
       name="content"
       cols="20"
-      [(ngModel)]="article.content"
-      required>
-    </textarea>
+      [(ngModel)]="article.content">
+    </textarea> -->
 
     <div class="button-group pull-right">
       <input type="button" class="button cancel" value="Cancel" (click)="onCancel()">

@@ -1,3 +1,5 @@
+import { Media } from "../media/media.model";
+
 export class Article {
     public _id: string;
     public title: string;
@@ -6,6 +8,7 @@ export class Article {
     public content: string;
     public createdDate: Date;
     public active: boolean;
+    public mediaElement: any;
 
     constructor(
         title: string,

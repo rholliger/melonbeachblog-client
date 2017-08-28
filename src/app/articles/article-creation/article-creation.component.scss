@@ -17,5 +17,83 @@
             box-shadow: 0px 0px 2px $red;
             transition: border 400ms ease-out, box-shadow 400ms ease-out;
         }
+
+        .media-buttons {
+            width: 300px;
+            display: flex;
+            margin-bottom: 12px;
+            justify-content: space-between;
+
+            app-button {
+                width: calc(50% - 4px);
+                height: 40px;
+            }
+        }
+
+        .media-container {
+            width: 300px;
+            // margin: 0 auto;
+
+            .media {
+                position: relative;
+
+                &:hover {
+                    .buttons {
+                        display: block;
+                    }
+                }
+
+                img {
+                    width: 100%;
+                }
+
+                .buttons {
+                    display: none;
+                    position: absolute;
+                    right: 0;
+                    top: 0;
+                    background-color: black;
+                    color: white;
+
+                    span {
+                        cursor: pointer;
+                        padding: 6px;
+                    }
+                }
+            }
+        }
+
+        .media-selector-container {
+            position: fixed;
+            height: 100%;
+            width: 100%;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 2000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            .media-selector {
+                width: 600px;
+                height: 600px;
+                background-color: #ccc;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-around;
+                align-content: space-around;
+                margin: 0;
+                padding: 0;
+                overflow: auto;
+
+                .media-item {
+                    width: 160px;
+                    height: 160px;
+                    background-color: #bbb;
+                }
+            }
+        }
     }
 }

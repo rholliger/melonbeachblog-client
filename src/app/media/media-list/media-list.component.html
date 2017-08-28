@@ -1,6 +1,6 @@
 <app-page-header title="Media" hasNewLink="true"></app-page-header>
 <app-list
-  [headerColumns]="['Date', 'Preview', 'Name', 'Description', '']"
+  [headerColumns]="['Date', 'Preview', 'Name', '']"
   [rows]="[
     {
       type: 'date',
@@ -13,10 +13,6 @@
     {
       type: 'string',
       content: 'fileName'
-    },
-    {
-      type: 'string',
-      content: 'description'
     },
     {
       type: 'buttons',

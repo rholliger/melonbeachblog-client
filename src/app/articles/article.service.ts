@@ -61,13 +61,7 @@ export class ArticleService {
     }
 
     createArticle(article: Article) {
-        const data = {
-            title: article.title,
-            slug: article.slug,
-            category: article.category,
-            content: article.content
-        };
-        return this.http.post(config.apiUrl + '/articles', data);
+        return this.http.post(config.apiUrl + '/articles', article);
     }
 
     deleteArticle(articleId: string) {

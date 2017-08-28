@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from "@angular/forms";
 
 import { ListComponent } from './list/list.component';
 import { PageHeaderComponent } from "./page-header.component";
@@ -9,24 +10,31 @@ import { ToggleButtonComponent } from "./toggle-button/toggle-button.component";
 import { SharedService } from "./shared.service";
 import { ListService } from "./list/list.service";
 import { FileSizePipe } from "./file-size.pipe";
+import { ButtonComponent } from './button/button.component';
+import { RichTextEditorComponent } from "./rich-text-editor/rich-text-editor.component";
 
 @NgModule({
     imports: [
         CommonModule,
         AppRoutingModule,
+        FormsModule
     ],
     declarations: [
         ListComponent,
         PageHeaderComponent,
         ListItemComponent,
         ToggleButtonComponent,
-        FileSizePipe
+        FileSizePipe,
+        ButtonComponent,
+        RichTextEditorComponent
     ],
     providers: [SharedService, ListService],
     exports: [
         ListComponent,
         PageHeaderComponent,
-        FileSizePipe
+        FileSizePipe,
+        ButtonComponent,
+        RichTextEditorComponent
     ]
 })
 export class SharedModule {}

@@ -22,7 +22,7 @@
         </a>
     </span>
     <span *ngSwitchCase="'file'">
-        <img src="http://localhost:3000/uploads/{{content}}" alt="bla" width="300px">
+        <img src="http://localhost:3000/uploads/{{content}}" alt="{{content}}" width="300px">
     </span>
     <span *ngSwitchDefault>{{ content }}</span>
 </span>

@@ -1,0 +1,27 @@
+<a [ngSwitch]="type">
+  <span *ngSwitchCase="'icon-text'">
+    <span class="glyphicon glyphicon-{{ icon }}"></span>
+    <span>{{ text }}</span>
+  </span>
+
+  <span *ngSwitchCase="'upload'">
+    <label for="upload-button">
+      <span class="glyphicon glyphicon-cloud-upload"></span>
+      <span>Upload</span>
+    </label>
+    <input
+      type="file"
+      id="upload-button"
+      name="mediaUpload"
+      placeholder="Upload a file"
+      (change)="onUpload($event)">
+  </span>
+
+  <span *ngSwitchCase="'icon'">
+    <span class="glyphicon glyphicon-{{ icon }} icon"></span>
+  </span>
+
+  <span *ngSwitchDefault>
+    <span>{{ text }}</span>
+  </span>
+</a>

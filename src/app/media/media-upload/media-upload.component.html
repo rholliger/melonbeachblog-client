@@ -9,16 +9,7 @@
       [class.dragged-over]="isDraggedOver">
       <div class="upload-info-container">
         <div class="upload-button-container">
-          <label for="upload-button">
-            <span class="glyphicon glyphicon-cloud-upload"></span>
-            <span>Upload</span>
-          </label>
-          <input
-            type="file"
-            id="upload-button"
-            name="mediaUpload"
-            placeholder="Upload a file"
-            (change)="onUpload($event)">
+          <app-button type="upload" (uploadDone)="onUploadDone($event)"></app-button>
         </div>
         <p class="info">{{ name }}</p>
         <table class="file-list">

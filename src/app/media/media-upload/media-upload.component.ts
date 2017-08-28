@@ -24,8 +24,8 @@ export class MediaUploadComponent implements OnInit {
   ngOnInit() {
   }
 
-  onUpload(event: any) {
-    this.files = event.target.files;
+  onUploadDone(event: any) {
+    this.router.navigate(['../'], { relativeTo: this.route });
   }
 
   onDragOver(event: any) {
@@ -46,20 +46,15 @@ export class MediaUploadComponent implements OnInit {
     this.isDraggedOver = false;
     
     this.files = event.dataTransfer.files;
-    // this.name = this.file.name;
   }
 
   onRemoveFile(index: number) {
-    // this.files = this.files.splice(index, 1);
-    const blabla = Array.from(this.files);
-    blabla.splice(index, 1);
-    this.files = blabla;
-    console.log('on remove file', blabla);
+    const toUploadedFiles = Array.from(this.files);
+    toUploadedFiles.splice(index, 1);
+    this.files = toUploadedFiles;
   }
 
   onSubmit(form: NgForm) {
-    console.log(this.files);
-
     this.mediaService.uploadMedia(this.files).subscribe(
       () => this.router.navigate(['../'], { relativeTo: this.route })
     );
