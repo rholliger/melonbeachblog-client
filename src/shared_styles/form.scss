@@ -17,7 +17,8 @@ form {
     input[type="text"],
     input[type="email"],
     input[type="password"],
-    textarea {
+    textarea,
+    select {
         display: block;
         width: 100%;
         padding: 8px;
@@ -34,6 +35,12 @@ form {
         &::placeholder {
             color: $lightGrey;
         }
+    }
+
+    select {
+        width: auto;
+        height: 40px;
+        border-radius: 0;
     }
 
     .button-group {

@@ -1,6 +1,7 @@
-import { Component, OnInit, ViewChild, Input } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, Renderer2, AfterViewChecked, HostListener } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router, ActivatedRoute, Params } from '@angular/router';
+
 import { Subscription } from 'rxjs/Subscription';
 import swal from 'sweetalert2';
 
@@ -15,7 +16,7 @@ import { MediaService } from "../../media/media.service";
   templateUrl: './article-creation.component.html',
   styleUrls: ['../../../shared_styles/form.scss', './article-creation.component.scss']
 })
-export class ArticleCreationComponent implements OnInit {
+export class ArticleCreationComponent implements OnInit, AfterViewChecked {
   article: Article;
   id: string;
   editMode: boolean = false;
@@ -24,6 +25,7 @@ export class ArticleCreationComponent implements OnInit {
   showMediaSelector: boolean = false;
   editorContent: string = '';
   @ViewChild('f') form: NgForm;
+  @ViewChild('quillEditor') quillEditor;
   @Input() tinyTest: string;
   
   editor;
@@ -33,7 +35,8 @@ export class ArticleCreationComponent implements OnInit {
     private mediaService: MediaService,
     private router: Router,
     private route: ActivatedRoute,
-    private messagingService: MessagingService
+    private messagingService: MessagingService,
+    private renderer: Renderer2
   ) { }
 
   ngOnInit() {
@@ -46,8 +49,8 @@ export class ArticleCreationComponent implements OnInit {
 
     if (this.editMode) {
       this.articleService.fetchArticle(this.id).subscribe(
-        (data) => {
-          this.article = data.json();
+        (article: any) => {
+          this.article = article;
           if (this.article.mediaElement) {
             this.showTopElement = true;
             this.topElementMedia = this.article.mediaElement.mediaFile;
@@ -56,6 +59,18 @@ export class ArticleCreationComponent implements OnInit {
       );
     } else {
       this.article = new Article('', '', '', '');
+    }
+  }
+
+  ngAfterViewChecked() {
+    // The toolbar buttons of the quill editor need to have a tabIndex of -1,
+    // so they don't get focused if a user tabs to the editor
+    if (this.quillEditor) {
+      const quillToolbarButtons = this.quillEditor.elementRef
+        .nativeElement.querySelectorAll('.ql-toolbar button');
+      quillToolbarButtons.forEach(
+        (button) => this.renderer.setAttribute(button, 'tabIndex', '-1')
+      );
     }
   }
 
@@ -78,14 +93,18 @@ export class ArticleCreationComponent implements OnInit {
 
     if (this.editMode) {
       this.articleService.updateArticle(this.id, this.article).subscribe(
-        (data) => {
-          this.articleService.changeArticle(this.id, data.json())
-          this.navigateBackToTheList()
+        (article: any) => {
+          console.log('edited ARTICLE', article);
+          this.articleService.changeArticle(this.id, article);
+          this.navigateBackToTheList();
         }
       )
     } else {
       this.articleService.createArticle(this.article).subscribe(
-        () => this.navigateBackToTheList()
+        (article: any) => {
+          this.articleService.addArticle(article);
+          this.navigateBackToTheList();
+        }
       );
     }
   }
@@ -146,5 +165,15 @@ export class ArticleCreationComponent implements OnInit {
 
   removeMediaSelector() {
     this.showMediaSelector = false;
+  }
+
+  @HostListener('document:keydown', ['$event'])
+  onKeyUpHandler(event: any) {
+    console.log('key pressed', event.keyCode, event.metaKey);
+    if (event.metaKey && (event.keyCode === 83)) {
+      event.preventDefault();
+      this.onSubmit(this.form);
+      return false;
+    }
   }
 }

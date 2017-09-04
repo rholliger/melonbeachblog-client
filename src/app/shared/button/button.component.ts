@@ -26,9 +26,9 @@ export class ButtonComponent implements OnInit {
     this.uploadStarted.emit();
 
     this.mediaService.uploadMedia(event.target.files).subscribe(
-      (data: Response) => {
-        console.log('uploaded', data.json());
-        this.uploadDone.emit(data.json());
+      (media: any) => {
+        this.mediaService.addMedia(media);
+        this.uploadDone.emit(media);
       }
     );
   }

@@ -1,8 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-import { HttpModule } from '@angular/http';
-import { SimpleNotificationsModule } from 'angular2-notifications';
+import { HttpModule, XHRBackend, RequestOptions, Http } from '@angular/http';
+import { SimpleNotificationsModule, NotificationsService } from 'angular2-notifications';
 
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';

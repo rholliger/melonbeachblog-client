@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from "@angular/forms";
+import { FormsModule } from '@angular/forms';
 
 import { ListComponent } from './list/list.component';
 import { PageHeaderComponent } from "./page-header.component";
@@ -14,12 +14,13 @@ import { ButtonComponent } from './button/button.component';
 import { RichTextEditorComponent } from "./rich-text-editor/rich-text-editor.component";
 import { MediaSelectorComponent } from './media-selector/media-selector.component';
 import { MediaItemComponent } from './media-selector/media-item/media-item.component';
+import { HttpClient } from "./http-client.service";
 
 @NgModule({
     imports: [
         CommonModule,
         AppRoutingModule,
-        FormsModule
+        FormsModule,
     ],
     declarations: [
         ListComponent,
@@ -32,7 +33,7 @@ import { MediaItemComponent } from './media-selector/media-item/media-item.compo
         MediaSelectorComponent,
         MediaItemComponent
     ],
-    providers: [SharedService, ListService],
+    providers: [SharedService, ListService, HttpClient],
     exports: [
         ListComponent,
         PageHeaderComponent,

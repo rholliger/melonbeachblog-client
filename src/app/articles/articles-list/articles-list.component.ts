@@ -17,6 +17,7 @@ import { Subscription } from "rxjs/Subscription";
 export class ArticlesListComponent implements OnInit, OnDestroy {
   articles: Article[] = [];
   clickedDeleteSubscription: Subscription;
+  isArticleListLoading: boolean = true;
 
   constructor(
     private articleService: ArticleService,
@@ -28,11 +29,16 @@ export class ArticlesListComponent implements OnInit, OnDestroy {
     private notificationsService: NotificationsService) { }
 
   ngOnInit() {
-    // this.articles = this.articleService.getArticles();
-    this.articleService.fetchArticles();
+    if (this.articleService.getArticles()) {
+      this.articles = this.articleService.getArticles();
+      this.isArticleListLoading = false;
+    } else {
+      this.articleService.fetchArticles();
+    }
 
     this.articleService.articlesChanged.subscribe(
       (articles: Article[]) => {
+        this.isArticleListLoading = false;
         this.articles = articles;
       }
     );
@@ -40,7 +46,6 @@ export class ArticlesListComponent implements OnInit, OnDestroy {
     this.sharedService.buttonToggled.subscribe(
       (data: any) => {
         this.articleService.changeActiveState(data.id, data.value);
-        this.notificationsService.error('This option is not allowed', 'Not authorized');
       }
     )
 

@@ -5,7 +5,7 @@
         <th *ngFor="let item of headerColumns">{{ item }}</th>
       </tr>
     </thead>
-    <tbody *ngIf="data.length > 0; else elseTemplate">
+    <tbody *ngIf="data.length">
       <tr *ngFor="let row of data">
         <td
           app-list-item
@@ -16,12 +16,18 @@
         </td>
       </tr>
     </tbody>
-    <ng-template #elseTemplate>
-      <tbody class="empty">
-        <tr>
-          <td colspan="100%">No Results found</td>
-        </tr>
-      </tbody>
-    </ng-template>
+    <tbody class="empty" *ngIf="!isLoading && data.length === 0">
+      <tr>
+        <td colspan="100%">No Results found</td>
+      </tr>
+    </tbody>
   </table>
+  <div class="loading-wrapper" *ngIf="isLoading">
+    <div class="loader-inner ball-scale-multiple">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </div>
 </div> 
+  

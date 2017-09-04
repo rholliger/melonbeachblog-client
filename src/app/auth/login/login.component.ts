@@ -25,8 +25,8 @@ export class LoginComponent implements OnInit {
     this.authService.login(form.value.email, form.value.password)
       .then(() => this.router.navigate(['']))
       .catch((error) => {
-        const bla = error.json();
-        this.error = bla.message;
+        const errorMessage = error.json().message;
+        this.error = errorMessage;
         form.setValue({
           email: form.value.email,
           password: ''

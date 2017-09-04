@@ -56,7 +56,10 @@ export class MediaUploadComponent implements OnInit {
 
   onSubmit(form: NgForm) {
     this.mediaService.uploadMedia(this.files).subscribe(
-      () => this.router.navigate(['../'], { relativeTo: this.route })
+      () => {
+        this.mediaService.fetchMedia();
+        this.router.navigate(['../'], { relativeTo: this.route });
+      }
     );
   }
 

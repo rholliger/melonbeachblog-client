@@ -5,7 +5,7 @@
     <label>Top Element</label>
     <div class="media-buttons" [style.display]="showTopElement ? 'none' : 'flex'">
       <app-button type="upload" (uploadStarted)="onUploadStarted()" (uploadDone)="onUploadDone($event)"></app-button>
-      <app-button type="icon-text" icon="cloud-upload" text="Choose" (click)="onOpenMediaSelector()"></app-button> 
+      <app-button type="icon-text" icon="folder-open" text="Choose" (click)="onOpenMediaSelector()"></app-button> 
     </div>
     <div class="media-container" *ngIf="showTopElement">
       <div class="media">
@@ -73,20 +73,8 @@
       }"
       [style]="{ height: '250px' }"
       required
+      #quillEditor
     ></quill-editor>
-    <!-- <rich-text-editor
-      elementId="content"
-      name="content"
-      [content]="article.content"
-      (onEditorChange)="onEditorChanged($event)"
-      required
-    ></rich-text-editor> -->
-    <!-- <textarea
-      id="content"
-      name="content"
-      cols="20"
-      [(ngModel)]="article.content">
-    </textarea> -->
 
     <div class="button-group pull-right">
       <input type="button" class="button cancel" value="Cancel" (click)="onCancel()">

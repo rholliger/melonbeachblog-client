@@ -1,31 +1,49 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
 import { Article } from './article.model';
 import { Subject } from "rxjs/Subject";
 import { environment as config } from '../../environments/environment';
-import { SharedService } from "../shared/shared.service";
+import { HttpClient } from "../shared/http-client.service";
 
 @Injectable()
 export class ArticleService {
-    constructor(private http: Http, private sharedService: SharedService) {};
+    constructor(private httpClient: HttpClient) {};
 
     articlesChanged = new Subject<Article[]>();
-    private articles: Article[] = [];
+    private articles: Article[];
+    private entity: string = 'articles';
 
     setArticles(articles: Article[]) {
         this.articles = articles;
     }
 
     getArticles() {
-        return this.articles.slice();
+        if (this.articles) return this.articles.slice();
     }
 
     getArticle(articleId: string) {
         return this.articles.find((el) => el._id === articleId);
     }
 
+    addArticle(article: Article) {
+        this.articles.unshift(article);
+        this.articlesChanged.next(this.articles.slice());
+    }
+
     changeArticle(articleId: string, article: Article) {
-        this.articles[articleId] = article;
+        this.articles.forEach((el, index) => {
+            if (el._id === articleId) {
+                this.articles[index] = article;
+            }
+        });
+        this.articlesChanged.next(this.articles.slice());
+    }
+
+    changeActiveStateFromArticle(articleId: string, activeState: boolean) {
+        this.articles.forEach((el, index) => {
+            if (el._id === articleId) {
+                this.articles[index].active = activeState;
+            }
+        });
         this.articlesChanged.next(this.articles.slice());
     }
 
@@ -38,46 +56,40 @@ export class ArticleService {
     /* -- API Methods -- */
 
     fetchArticles() {
-        this.http.get(config.apiUrl + '/articles').subscribe(
-            (response: Response) => {
-                const articles = response.json();
+        this.httpClient.get(`/${this.entity}`, { error: true }).subscribe(
+            (articles: any) => {
                 this.articles = articles;
                 this.articlesChanged.next(this.articles.slice());
             }
-        )
+        );
     }
 
     fetchArticle(articleId: string) {
-        return this.http.get(config.apiUrl + '/articles/' + articleId);
+        return this.httpClient.get(`/${this.entity}/${articleId}`);
     }
 
     createArticle(article: Article) {
-        return this.http.post(config.apiUrl + '/articles', article, 
-            this.sharedService.getRequestOptions());
+        return this.httpClient.post(`/${this.entity}`, article);
     }
 
     deleteArticle(articleId: string) {
-        this.http.delete(config.apiUrl + '/articles/' + articleId,
-            this.sharedService.getRequestOptions())
-                .subscribe(
-                    (response: Response) => {
-                        this.removeArticle(articleId);
-                    }
-                );
+        this.httpClient.delete(`/${this.entity}/${articleId}`).subscribe(
+            (article: any) => {
+                this.removeArticle(articleId);
+            }
+        );
     }
 
     updateArticle(articleId: string, article: Article) {
-        return this.http.put(config.apiUrl + '/articles/' + articleId, article,
-            this.sharedService.getRequestOptions());
+        return this.httpClient.put(`/${this.entity}/${articleId}`, article);
     }
 
     changeActiveState(articleId: string, isActive: boolean) {
-        this.http.put(config.apiUrl + '/articles/' + articleId + '/active', {
+        this.httpClient.put(`/${this.entity}/${articleId}/active`, {
             active: isActive
-        }, this.sharedService.getRequestOptions()).subscribe(
-            (response: Response) => {
-                const article = response.json();
-                this.changeArticle(articleId, article);
+        }).subscribe(
+            (article: any) => {
+                this.changeActiveStateFromArticle(articleId, isActive);
             }
         );
     }

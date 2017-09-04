@@ -6,22 +6,22 @@ import 'rxjs/add/operator/map';
 import { Subject } from "rxjs/Subject";
 
 import { environment as config } from '../../environments/environment';
+import { HttpClient } from "../shared/http-client.service";
 
 @Injectable()
 export class AuthService {
-    constructor(private http: Http, private router: Router) {}
+    constructor(private httpClient: HttpClient, private router: Router) {}
 
     loggedInStatusChanged = new Subject<boolean>();
     
     login(email: string, password: string) {
         return new Promise((resolve, reject) => {
-            this.http.post(config.apiUrl + '/login', {
+            this.httpClient.post('/login', {
                 email: email,
                 password: password
-            }).subscribe(
-                (response: Response) => {
-                    let data = response.json();
-                    localStorage.setItem('user-token', JSON.stringify(data.token));
+            }, { showErrors: false }).subscribe(
+                (loginData: any) => {
+                    localStorage.setItem('user-token', JSON.stringify(loginData.token));
                     this.loggedInStatusChanged.next(true);
                     resolve();
                 },
@@ -36,5 +36,9 @@ export class AuthService {
         localStorage.removeItem('user-token');
         this.loggedInStatusChanged.next(false);
         this.router.navigate(['/login']);
+    }
+
+    getAuthorizationHeader() {
+        return JSON.parse(localStorage.getItem('user-token'));
     }
 }

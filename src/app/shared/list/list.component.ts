@@ -9,6 +9,7 @@ export class ListComponent implements OnInit {
     @Input() headerColumns: string[] = [];
     @Input() rows: object[] = [];
     @Input() data: any[] = [];
+    @Input() isLoading: boolean;
 
     ngOnInit() {
     }

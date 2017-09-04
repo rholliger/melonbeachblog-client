@@ -1,17 +1,31 @@
 import { Injectable } from "@angular/core";
-import { Http, Response } from "@angular/http";
-import { Media } from "./media.model";
+
 import { Subject } from "rxjs/Subject";
 import { environment as config } from '../../environments/environment';
-import { SharedService } from "../shared/shared.service";
+
+import { Media } from "./media.model";
+import { HttpClient } from "../shared/http-client.service";
 
 @Injectable()
 export class MediaService {
-    constructor(private http: Http, private sharedService: SharedService) {}
+    constructor(private httpClient: HttpClient) {}
 
     mediaChanged = new Subject<Media[]>();
+    private media: Media[];
+    private entity: string = 'media';
 
-    private media: Media[] = [];
+    setMedia(media: Media[]) {
+        this.media = media;
+    }
+
+    getMedia() {
+        if (this.media) return this.media.slice();
+    }
+
+    addMedia(media: Media) {
+        this.media.unshift(media);
+        this.mediaChanged.next(this.media.slice());
+    }
 
     removeMedia(mediaId: string) {
         const index = this.media.findIndex((el) => el._id === mediaId);
@@ -22,21 +36,18 @@ export class MediaService {
     /* -- API Methods -- */
 
     fetchMedia() {
-        this.http.get(config.apiUrl + '/media').subscribe(
-            (response: Response) => {
-                const media = response.json();
+        this.httpClient.get(`/${this.entity}`).subscribe(
+            (media: any) => {
                 this.media = media;
                 this.mediaChanged.next(this.media.slice());
             }
-        )
+        );
     }
 
     deleteMedia(mediaId: string) {
-        this.http.delete(config.apiUrl + '/media/' + mediaId,
-            this.sharedService.getRequestOptions())
-                .subscribe(
-                    (response: Response) => this.removeMedia(mediaId)
-                )
+        this.httpClient.delete(`/${this.entity}/${mediaId}`).subscribe(
+            (media: any) => this.removeMedia(mediaId)
+        );
     }
 
     uploadMedia(files: any[]) {
@@ -46,7 +57,6 @@ export class MediaService {
             formData.append('mediaUpload', files[i]);
         }
 
-        return this.http.post(config.apiUrl + '/media', formData,
-            this.sharedService.getRequestOptions());
+        return this.httpClient.post(`/${this.entity}`, formData);
     }
 }

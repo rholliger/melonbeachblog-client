@@ -8,13 +8,4 @@ export class SharedService {
     constructor() {}
 
     buttonToggled = new Subject<{id: string, value: boolean}>();
-
-    getRequestOptions() {
-        const headers = new Headers();
-        headers.append('Authorization', `Bearer ${JSON.parse(localStorage.getItem('user-token'))}`);
-        const options = new RequestOptions({
-            headers: headers
-        });
-        return options;
-    }
 }

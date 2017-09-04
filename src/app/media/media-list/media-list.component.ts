@@ -13,14 +13,23 @@ import { Media } from "../media.model";
 export class MediaListComponent implements OnInit, OnDestroy {
   media: Media[] = [];
   clickedDeleteSubscription: Subscription;
+  isMediaListLoading: boolean = true;
 
   constructor(private mediaService: MediaService, private listService: ListService) { }
 
   ngOnInit() {
-    this.mediaService.fetchMedia();
+    if (this.mediaService.getMedia()) {
+      this.media = this.mediaService.getMedia();
+      this.isMediaListLoading = false;
+    } else {
+      this.mediaService.fetchMedia();
+    }
 
     this.mediaService.mediaChanged.subscribe(
-      (media: Media[]) => this.media = media
+      (media: Media[]) => {
+        this.isMediaListLoading = false;
+        this.media = media;
+      }
     )
 
     this.clickedDeleteSubscription = this.listService.clickedDeleteButton.subscribe(
