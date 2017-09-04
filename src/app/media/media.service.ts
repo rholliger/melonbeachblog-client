@@ -3,10 +3,11 @@ import { Http, Response } from "@angular/http";
 import { Media } from "./media.model";
 import { Subject } from "rxjs/Subject";
 import { environment as config } from '../../environments/environment';
+import { SharedService } from "../shared/shared.service";
 
 @Injectable()
 export class MediaService {
-    constructor(private http: Http) {}
+    constructor(private http: Http, private sharedService: SharedService) {}
 
     mediaChanged = new Subject<Media[]>();
 
@@ -17,6 +18,8 @@ export class MediaService {
         this.media.splice(index, 1);
         this.mediaChanged.next(this.media.slice());
     }
+
+    /* -- API Methods -- */
 
     fetchMedia() {
         this.http.get(config.apiUrl + '/media').subscribe(
@@ -29,9 +32,11 @@ export class MediaService {
     }
 
     deleteMedia(mediaId: string) {
-        this.http.delete(config.apiUrl + '/media/' + mediaId).subscribe(
-            (response: Response) => this.removeMedia(mediaId)
-        )
+        this.http.delete(config.apiUrl + '/media/' + mediaId,
+            this.sharedService.getRequestOptions())
+                .subscribe(
+                    (response: Response) => this.removeMedia(mediaId)
+                )
     }
 
     uploadMedia(files: any[]) {
@@ -41,12 +46,7 @@ export class MediaService {
             formData.append('mediaUpload', files[i]);
         }
 
-        return this.http.post(config.apiUrl + '/media', formData);
+        return this.http.post(config.apiUrl + '/media', formData,
+            this.sharedService.getRequestOptions());
     }
-
-    // FetchMedia
-    // fetchArticle(articleId: string) {
-    //     return this.http.get(config.apiUrl + '/articles/' + articleId);
-    // }
-
 }

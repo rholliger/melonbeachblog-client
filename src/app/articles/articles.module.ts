@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
+import { QuillModule } from 'ngx-quill';
+
 import { ArticlesComponent } from './articles.component';
 import { ArticlesRoutingModule } from './articles-routing.module';
 import { ArticlesListComponent } from './articles-list/articles-list.component';
@@ -15,7 +17,8 @@ import { SharedModule } from "../shared/shared.module";
         CommonModule,
         FormsModule,
         ArticlesRoutingModule,
-        SharedModule
+        SharedModule,
+        QuillModule
     ],
     declarations: [
         ArticlesComponent,

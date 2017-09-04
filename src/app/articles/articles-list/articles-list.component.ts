@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
+import { NotificationsService } from "angular2-notifications";
 
 import { Article } from '../article.model';
 import { ArticleService } from '../article.service';
@@ -23,7 +24,8 @@ export class ArticlesListComponent implements OnInit, OnDestroy {
     private listService: ListService,
     private messagingService: MessagingService,
     private router: Router,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    private notificationsService: NotificationsService) { }
 
   ngOnInit() {
     // this.articles = this.articleService.getArticles();
@@ -38,6 +40,7 @@ export class ArticlesListComponent implements OnInit, OnDestroy {
     this.sharedService.buttonToggled.subscribe(
       (data: any) => {
         this.articleService.changeActiveState(data.id, data.value);
+        this.notificationsService.error('This option is not allowed', 'Not authorized');
       }
     )
 

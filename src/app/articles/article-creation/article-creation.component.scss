@@ -62,38 +62,5 @@
                 }
             }
         }
-
-        .media-selector-container {
-            position: fixed;
-            height: 100%;
-            width: 100%;
-            top: 0;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            z-index: 2000;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-
-            .media-selector {
-                width: 600px;
-                height: 600px;
-                background-color: #ccc;
-                display: flex;
-                flex-wrap: wrap;
-                justify-content: space-around;
-                align-content: space-around;
-                margin: 0;
-                padding: 0;
-                overflow: auto;
-
-                .media-item {
-                    width: 160px;
-                    height: 160px;
-                    background-color: #bbb;
-                }
-            }
-        }
     }
 }

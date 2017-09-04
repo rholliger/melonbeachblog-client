@@ -1,0 +1,23 @@
+<div class="ms-wrapper" (keyup.esc)="onRemoveModal()" #wrapper tabIndex="0">
+  <div class="ms-container">
+    <div class="ms-content">
+      <h3>Choose a Top Element</h3>
+      <a (click)="onRemoveModal()">
+        <span class="glyphicon glyphicon-remove"></span>
+      </a>
+      <ul>
+        <app-media-item
+          *ngFor="let media of mediaList; let i = index"
+          [media]="media"
+          (elementSelected)="onElementSelected($event)"
+        ></app-media-item>
+      </ul>
+    </div>
+    <div class="ms-action-bar" *ngIf="showAppButton">
+      <app-button
+        text="Select as Top Element"
+        (click)="onClickOnConfirm()"
+      ></app-button>
+    </div>
+  </div>
+</div>

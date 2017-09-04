@@ -12,6 +12,8 @@ import { ListService } from "./list/list.service";
 import { FileSizePipe } from "./file-size.pipe";
 import { ButtonComponent } from './button/button.component';
 import { RichTextEditorComponent } from "./rich-text-editor/rich-text-editor.component";
+import { MediaSelectorComponent } from './media-selector/media-selector.component';
+import { MediaItemComponent } from './media-selector/media-item/media-item.component';
 
 @NgModule({
     imports: [
@@ -26,7 +28,9 @@ import { RichTextEditorComponent } from "./rich-text-editor/rich-text-editor.com
         ToggleButtonComponent,
         FileSizePipe,
         ButtonComponent,
-        RichTextEditorComponent
+        RichTextEditorComponent,
+        MediaSelectorComponent,
+        MediaItemComponent
     ],
     providers: [SharedService, ListService],
     exports: [
@@ -34,7 +38,8 @@ import { RichTextEditorComponent } from "./rich-text-editor/rich-text-editor.com
         PageHeaderComponent,
         FileSizePipe,
         ButtonComponent,
-        RichTextEditorComponent
+        RichTextEditorComponent,
+        MediaSelectorComponent
     ]
 })
 export class SharedModule {}

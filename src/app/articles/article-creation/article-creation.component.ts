@@ -74,7 +74,7 @@ export class ArticleCreationComponent implements OnInit {
       this.article.mediaElement = this.topElementMedia;
     }
 
-    this.article.content = this.editorContent;
+    // this.article.content = this.editorContent;
 
     if (this.editMode) {
       this.articleService.updateArticle(this.id, this.article).subscribe(
@@ -99,6 +99,10 @@ export class ArticleCreationComponent implements OnInit {
 
   onEditorChanged(content: string) {
     this.editorContent = content;
+  }
+
+  onChangeTopElement() {
+    this.onOpenMediaSelector();
   }
 
   onRemoveTopElement() {
@@ -130,7 +134,17 @@ export class ArticleCreationComponent implements OnInit {
   }
 
   onOpenMediaSelector() {
-    console.log('media selector');
     this.showMediaSelector = true;
+  }
+  
+  onMediaSelection(selectedMedia: Media) {
+    this.article.mediaElement = {};
+    this.topElementMedia = selectedMedia;
+    this.showTopElement = true;
+    this.showMediaSelector = false;
+  }
+
+  removeMediaSelector() {
+    this.showMediaSelector = false;
   }
 }

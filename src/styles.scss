@@ -76,12 +76,32 @@ html, body {
         }
     }
 
+    // Custom styles for the quill editor
+    .ql-toolbar {
+        button {
+            border-radius: 0;
+            min-width: auto;
+        }
+    }
+
     // Custom styles for the alert message overlay from sweetalert
     .alert {
         background-color: red;
 
         button {
             margin-left: 10px;
+        }
+    }
+
+
+    .simple-notification {
+        .sn-title {
+            font-size: 18px;
+            line-height: 24px;
+        }
+        
+        .sn-content {
+            margin-bottom: 6px;
         }
     }
 }

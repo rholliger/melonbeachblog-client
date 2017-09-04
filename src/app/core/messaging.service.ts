@@ -1,4 +1,5 @@
 import swal from 'sweetalert2';
+import { Subject } from "rxjs/Subject";
 
 export class MessagingService {
     private messageData: object = {

@@ -10,9 +10,9 @@
     <div class="media-container" *ngIf="showTopElement">
       <div class="media">
         <div class="buttons">
+          <span class="glyphicon glyphicon-refresh" (click)="onChangeTopElement()"></span>
           <span class="glyphicon glyphicon-remove" (click)="onRemoveTopElement()"></span>
         </div>
-        <!-- <img src="http://localhost:3000/uploads/{{ topElementFileName }}" alt=""> -->
         <img *ngIf="topElementMedia" src="http://localhost:3000/uploads/{{ topElementMedia.fileName }}">
       </div>
       <div class="media-info">
@@ -25,31 +25,11 @@
       </div>
     </div>
 
-    <div class="media-selector-container" *ngIf="showMediaSelector">
-      <div class="media-selector">
-        <div class="media-item"></div>
-        <div class="media-item"></div>
-        <div class="media-item"></div>
-        <div class="media-item"></div>
-        <div class="media-item"></div>
-        <div class="media-item"></div>
-        <div class="media-item"></div>
-        <div class="media-item"></div>
-        <div class="media-item"></div>
-        <div class="media-item"></div>
-        <div class="media-item"></div>
-        <div class="media-item"></div>
-        <div class="media-item"></div>
-        <div class="media-item"></div>
-        <div class="media-item"></div>
-        <div class="media-item"></div>
-        <div class="media-item"></div>
-        <div class="media-item"></div>
-        <div class="media-item"></div>
-        <div class="media-item"></div>
-        <div class="media-item"></div>
-      </div>
-    </div>
+    <app-media-selector
+      *ngIf="showMediaSelector"
+      (clickedConfirm)="onMediaSelection($event)"
+      (clickedCancel)="removeMediaSelector()"
+    ></app-media-selector>
 
     <label for="title">Title</label>
     <input
@@ -73,20 +53,34 @@
       id="category"
       name="category"
       [(ngModel)]="article.category"
+      required
     >
-      <option selected disabled>Choose an option</option>
+      <option value="" selected disabled>Please choose a category</option>
       <option value="news">News</option>
       <option value="gaming">Gaming</option>
     </select> 
 
     <label for="content">Content</label>
-    <rich-text-editor
+    <quill-editor
+      name="content"
+      [(ngModel)]="article.content"
+      [modules]="{
+        toolbar: [
+          ['bold', 'italic', 'underline'],
+          [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+          [{ 'align': [] }]
+        ]
+      }"
+      [style]="{ height: '250px' }"
+      required
+    ></quill-editor>
+    <!-- <rich-text-editor
       elementId="content"
       name="content"
       [content]="article.content"
       (onEditorChange)="onEditorChanged($event)"
       required
-    ></rich-text-editor>
+    ></rich-text-editor> -->
     <!-- <textarea
       id="content"
       name="content"
