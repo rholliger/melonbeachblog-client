@@ -25,10 +25,7 @@
         "../node_modules/quill/dist/quill.snow.css",
         "styles.scss"
       ],
-      "scripts": [
-        "../node_modules/tinymce/tinymce.js",
-        "../node_modules/tinymce/themes/modern/theme.js"
-      ],
+      "scripts": [],
       "environmentSource": "environments/environment.ts",
       "environments": {
         "dev": "environments/environment.ts",

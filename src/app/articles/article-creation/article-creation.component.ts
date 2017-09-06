@@ -11,6 +11,8 @@ import { MessagingService } from '../../core/messaging.service';
 import { Media } from "../../media/media.model";
 import { MediaService } from "../../media/media.service";
 
+import * as Quill from 'quill';
+
 @Component({
   selector: 'app-article-creation',
   templateUrl: './article-creation.component.html',
@@ -40,6 +42,10 @@ export class ArticleCreationComponent implements OnInit, AfterViewChecked {
   ) { }
 
   ngOnInit() {
+    // Use align styles instead of align classes for the quill editor
+    var AlignStyle = Quill.import('attributors/style/align');
+    Quill.register(AlignStyle, true);
+
     this.route.params.subscribe(
       (params: Params) => {
         this.id = params['id'];
@@ -167,7 +173,8 @@ export class ArticleCreationComponent implements OnInit, AfterViewChecked {
     this.showMediaSelector = false;
   }
 
-  @HostListener('document:keydown', ['$event'])
+  // TODO: Should we be able to save by pressing cmd + save?
+  @HostListener('keydown', ['$event'])
   onKeyUpHandler(event: any) {
     console.log('key pressed', event.keyCode, event.metaKey);
     if (event.metaKey && (event.keyCode === 83)) {

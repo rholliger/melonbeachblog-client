@@ -11,7 +11,6 @@ import { SharedService } from "./shared.service";
 import { ListService } from "./list/list.service";
 import { FileSizePipe } from "./file-size.pipe";
 import { ButtonComponent } from './button/button.component';
-import { RichTextEditorComponent } from "./rich-text-editor/rich-text-editor.component";
 import { MediaSelectorComponent } from './media-selector/media-selector.component';
 import { MediaItemComponent } from './media-selector/media-item/media-item.component';
 import { HttpClient } from "./http-client.service";
@@ -29,7 +28,6 @@ import { HttpClient } from "./http-client.service";
         ToggleButtonComponent,
         FileSizePipe,
         ButtonComponent,
-        RichTextEditorComponent,
         MediaSelectorComponent,
         MediaItemComponent
     ],
@@ -39,7 +37,6 @@ import { HttpClient } from "./http-client.service";
         PageHeaderComponent,
         FileSizePipe,
         ButtonComponent,
-        RichTextEditorComponent,
         MediaSelectorComponent
     ]
 })
