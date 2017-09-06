@@ -13,8 +13,8 @@ import { MediaService } from "./media.service";
     imports: [
         CommonModule,
         FormsModule,
-        MediaRoutingModule,
-        SharedModule
+        SharedModule,
+        MediaRoutingModule
     ],
     declarations: [
         MediaComponent,
@@ -22,8 +22,6 @@ import { MediaService } from "./media.service";
         MediaUploadComponent
     ],
     providers: [],
-    exports: [
-        // MediaRoutingModule
-    ]
+    exports: []
 })
 export class MediaModule {}

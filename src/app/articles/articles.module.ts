@@ -26,8 +26,6 @@ import { SharedModule } from "../shared/shared.module";
         ArticleCreationComponent
     ],
     providers: [ArticleService, ArticleTestGuard],
-    exports: [
-        // ArticlesRoutingModule
-    ]
+    exports: []
 })
 export class ArticlesModule {}
