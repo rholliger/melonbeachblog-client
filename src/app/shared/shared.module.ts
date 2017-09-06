@@ -18,7 +18,7 @@ import { HttpClient } from "./http-client.service";
 @NgModule({
     imports: [
         CommonModule,
-        AppRoutingModule,
+        // AppRoutingModule,
         FormsModule,
     ],
     declarations: [

@@ -23,7 +23,7 @@ import { MediaService } from "./media.service";
     ],
     providers: [MediaService],
     exports: [
-        MediaRoutingModule
+        // MediaRoutingModule
     ]
 })
 export class MediaModule {}

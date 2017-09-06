@@ -10,6 +10,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AuthService } from "./auth/auth.service";
 import { AuthGuard } from "./auth/auth.guard";
 import { MessagingService } from "./core/messaging.service";
+import { SharedModule } from "./shared/shared.module";
 
 @NgModule({
   declarations: [

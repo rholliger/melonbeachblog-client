@@ -12,15 +12,17 @@ import { SharedModule } from '../shared/shared.module';
 import { AuthModule } from "../auth/auth.module";
 import { NotFoundComponent } from './not-found/not-found.component';
 import { WildcardRoutingModule } from "./wildcard-routing.module";
+import { CoreRoutingModule } from "./core-routing.module";
 
 @NgModule({
   imports: [
     CommonModule,
-    MediaModule,
-    ArticlesModule,
+    // MediaModule,
+    // ArticlesModule,
     SharedModule,
     AuthModule,
-    WildcardRoutingModule
+    CoreRoutingModule,
+    // WildcardRoutingModule
     // AppRoutingModule,
   ],
   declarations: [
