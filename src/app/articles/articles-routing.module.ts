@@ -11,11 +11,6 @@ const articlesRoutes: Routes = [
     { path: '', component: ArticlesListComponent },
     { path: 'new', component: ArticleCreationComponent, /*canDeactivate: [ArticleTestGuard]*/ },
     { path: 'edit/:id', component: ArticleCreationComponent }
-    // { path: 'articles', component: ArticlesComponent, canActivate: [AuthGuard], children: [
-    //     { path: '', component: ArticlesListComponent },
-    //     { path: 'new', component: ArticleCreationComponent, /*canDeactivate: [ArticleTestGuard]*/ },
-    //     { path: 'edit/:id', component: ArticleCreationComponent }
-    // ] }
 ]
 
 @NgModule({

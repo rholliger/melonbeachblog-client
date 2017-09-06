@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-sidebar',
@@ -6,11 +6,29 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./sidebar.component.scss']
 })
 export class SidebarComponent implements OnInit {
-  showArrow = false;
+  showArticleLinkArrow = false;
+  showMediaLinkArrow = false;
+
+  @ViewChild('articlesLink') articlesLink;
+  @ViewChild('mediaLink') mediaLink;
 
   constructor() { }
 
   ngOnInit() {
+  }
+
+  ngDoCheck() {
+    if (this.articlesLink.nativeElement.classList.contains('active')) {
+      this.showArticleLinkArrow = true;
+    } else {
+      this.showArticleLinkArrow = false;
+    }
+
+    if (this.mediaLink.nativeElement.classList.contains('active')) {
+      this.showMediaLinkArrow = true;
+    } else {
+      this.showMediaLinkArrow = false;
+    }
   }
 
 }

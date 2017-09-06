@@ -16,9 +16,9 @@ import { SharedModule } from "../shared/shared.module";
     imports: [
         CommonModule,
         FormsModule,
-        ArticlesRoutingModule,
         SharedModule,
-        QuillModule
+        QuillModule,
+        ArticlesRoutingModule
     ],
     declarations: [
         ArticlesComponent,

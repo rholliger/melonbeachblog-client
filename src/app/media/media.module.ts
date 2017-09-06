@@ -21,7 +21,7 @@ import { MediaService } from "./media.service";
         MediaListComponent,
         MediaUploadComponent
     ],
-    providers: [MediaService],
+    providers: [],
     exports: [
         // MediaRoutingModule
     ]

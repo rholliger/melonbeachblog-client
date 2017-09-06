@@ -14,11 +14,14 @@ import { ButtonComponent } from './button/button.component';
 import { MediaSelectorComponent } from './media-selector/media-selector.component';
 import { MediaItemComponent } from './media-selector/media-item/media-item.component';
 import { HttpClient } from "./http-client.service";
+import { MediaService } from "../media/media.service";
+import { RouterModule } from "@angular/router";
 
 @NgModule({
     imports: [
         CommonModule,
         // AppRoutingModule,
+        RouterModule,
         FormsModule,
     ],
     declarations: [
@@ -31,7 +34,7 @@ import { HttpClient } from "./http-client.service";
         MediaSelectorComponent,
         MediaItemComponent
     ],
-    providers: [SharedService, ListService, HttpClient],
+    providers: [SharedService, ListService, HttpClient, MediaService],
     exports: [
         ListComponent,
         PageHeaderComponent,

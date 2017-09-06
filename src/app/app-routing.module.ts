@@ -9,10 +9,9 @@ import { ArticlesModule } from "./articles/articles.module";
 import { CoreModule } from "./core/core.module";
 
 const appRoutes: Routes = [
-    { path: '', pathMatch: 'full', children: [
-        { path: '', loadChildren: () => CoreModule }
-    ] },
-    // { path: 'login', component: LoginComponent }
+    { path: '', loadChildren: () => CoreModule },
+    { path: 'login', component: LoginComponent },
+    { path: '**', redirectTo: '', pathMatch: 'full' }
 ];
 
 @NgModule({

@@ -11,14 +11,14 @@
           <span class="glyphicon glyphicon-edit"></span>
           <span>Articles</span>
         </a>
-        <span class="right-edge" *ngIf="articlesLink.classList.contains('active')"></span>
+        <span class="right-edge" *ngIf="showArticleLinkArrow"></span>
       </li>
       <li #mediaLink routerLinkActive="active">
         <a routerLink="/media">
           <span class="glyphicon glyphicon-picture"></span>
           <span>Media</span>
         </a>
-        <span class="right-edge" *ngIf="mediaLink.classList.contains('active')"></span>
+        <span class="right-edge" *ngIf="showMediaLinkArrow"></span>
       </li>
       <!-- <li>
         <a href="">Settings</a>

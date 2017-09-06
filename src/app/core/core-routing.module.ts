@@ -3,17 +3,14 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from "./home/home.component";
 import { ArticlesModule } from "../articles/articles.module";
 import { MediaModule } from "../media/media.module";
+import { AuthGuard } from "../auth/auth.guard";
 
 const coreRoutes: Routes = [
-    { path: '', component: HomeComponent, children: [
+    { path: '', component: HomeComponent, canActivate: [AuthGuard], children: [
+        { path: '', redirectTo: 'articles', pathMatch: 'full' },
         { path: 'articles', loadChildren: () => ArticlesModule },
         { path: 'media', loadChildren: () => MediaModule }
     ] },
-    // { path: 'articles', component: ArticlesComponent, canActivate: [AuthGuard], children: [
-    //     { path: '', component: ArticlesListComponent },
-    //     { path: 'new', component: ArticleCreationComponent, /*canDeactivate: [ArticleTestGuard]*/ },
-    //     { path: 'edit/:id', component: ArticleCreationComponent }
-    // ] }
 ]
 
 @NgModule({
