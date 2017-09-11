@@ -70,7 +70,7 @@ export class MediaSelectorComponent implements OnInit, OnDestroy {
     this.clickedConfirm.emit(this.selectedElement);
   }
 
-  onRemoveModal(event: any) {
+  onRemoveModal() {
     this.toggleScroll();
     this.clickedCancel.emit();
   }

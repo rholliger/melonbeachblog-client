@@ -3,6 +3,7 @@ export class Media {
     public fileName: string;
     public mimeType: string;
     public createdDate: Date;
+    public url: string;
 
     constructor(
         fileName: string,
