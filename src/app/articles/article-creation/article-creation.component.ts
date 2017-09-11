@@ -166,13 +166,13 @@ export class ArticleCreationComponent implements OnInit, AfterViewChecked {
   }
 
   // TODO: Should we be able to save by pressing cmd + save?
-  @HostListener('keydown', ['$event'])
-  onKeyUpHandler(event: any) {
-    console.log('key pressed', event.keyCode, event.metaKey);
-    if (event.metaKey && (event.keyCode === 83)) {
-      event.preventDefault();
-      this.onSubmit(this.form);
-      return false;
-    }
-  }
+  // @HostListener('keydown', ['$event'])
+  // onKeyUpHandler(event: any) {
+  //   console.log('key pressed', event.keyCode, event.metaKey);
+  //   if (event.metaKey && (event.keyCode === 83)) {
+  //     event.preventDefault();
+  //     this.onSubmit(this.form);
+  //     return false;
+  //   }
+  // }
 }
