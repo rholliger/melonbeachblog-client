@@ -1,13 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
-import { NotificationsService } from "angular2-notifications";
+
+import { Subject } from "rxjs/Subject";
 
 import { Article } from '../article.model';
 import { ArticleService } from '../article.service';
 import { SharedService } from "../../shared/shared.service";
-import { MessagingService } from "../../core/messaging.service";
 import { ListService } from "../../shared/list/list.service";
-import { Subscription } from "rxjs/Subscription";
 
 @Component({
   selector: 'app-articles-list',
@@ -16,17 +15,16 @@ import { Subscription } from "rxjs/Subscription";
 })
 export class ArticlesListComponent implements OnInit, OnDestroy {
   articles: Article[] = [];
-  clickedDeleteSubscription: Subscription;
   isArticleListLoading: boolean = true;
+
+  private ngUnsubscribe: Subject<void> = new Subject<void>();
 
   constructor(
     private articleService: ArticleService,
     private sharedService: SharedService,
     private listService: ListService,
-    private messagingService: MessagingService,
     private router: Router,
-    private route: ActivatedRoute,
-    private notificationsService: NotificationsService) { }
+    private route: ActivatedRoute) { }
 
   ngOnInit() {
     if (this.articleService.getArticles()) {
@@ -36,30 +34,39 @@ export class ArticlesListComponent implements OnInit, OnDestroy {
       this.articleService.fetchArticles();
     }
 
-    this.articleService.articlesChanged.subscribe(
-      (articles: Article[]) => {
-        this.isArticleListLoading = false;
-        this.articles = articles;
-      }
-    );
+    this.articleService.articlesChanged
+      .takeUntil(this.ngUnsubscribe)
+      .subscribe(
+        (articles: Article[]) => {
+          this.isArticleListLoading = false;
+          this.articles = articles;
+        }
+      );
 
-    this.sharedService.buttonToggled.subscribe(
-      (data: any) => {
-        this.articleService.changeActiveState(data.id, data.value);
-      }
-    )
+    this.sharedService.buttonToggled
+      .takeUntil(this.ngUnsubscribe)
+      .subscribe(
+        (data: any) => {
+          this.articleService.changeActiveState(data.id, data.value);
+        }
+      )
 
-    this.listService.clickedEditButton.subscribe(
-      (id: string) => this.router.navigate(['edit', id], { relativeTo: this.route })
-    )
+    this.listService.clickedEditButton
+      .takeUntil(this.ngUnsubscribe)
+      .subscribe(
+        (id: string) => this.router.navigate(['edit', id], { relativeTo: this.route })
+      )
 
-    this.clickedDeleteSubscription = this.listService.clickedDeleteButton.subscribe(
-      (id: string) => this.articleService.deleteArticle(id)
-    )
+    this.listService.clickedDeleteButton
+      .takeUntil(this.ngUnsubscribe)
+      .subscribe(
+        (id: string) => this.articleService.deleteArticle(id)
+      )
   }
 
   ngOnDestroy() {
-    this.clickedDeleteSubscription.unsubscribe();
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 
 }

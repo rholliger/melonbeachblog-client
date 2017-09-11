@@ -1,12 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { ArticlesComponent } from './articles/articles.component';
-import { LoginComponent } from "./auth/login/login.component";
-import { HomeComponent } from "./core/home/home.component";
-import { AuthGuard } from "./auth/auth.guard";
-import { ArticlesModule } from "./articles/articles.module";
 import { CoreModule } from "./core/core.module";
+import { LoginComponent } from "./auth/login/login.component";
 
 const appRoutes: Routes = [
     { path: '', loadChildren: () => CoreModule },

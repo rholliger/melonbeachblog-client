@@ -68,7 +68,6 @@ export class HttpClient {
     }
 
     private showError(status: string, statusText: string, body: string) {
-        console.log('showError', status, statusText, body);
         this.notificationsService.error(`${status}: ${statusText}`, JSON.parse(body).message);
     }
 

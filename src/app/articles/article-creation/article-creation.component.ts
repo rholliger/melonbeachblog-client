@@ -1,9 +1,16 @@
-import { Component, OnInit, ViewChild, Input, Renderer2, AfterViewChecked, HostListener } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  Input,
+  Renderer2,
+  AfterViewChecked,
+  HostListener
+} from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 
 import { Subscription } from 'rxjs/Subscription';
-import swal from 'sweetalert2';
 
 import { ArticleService } from '../article.service';
 import { Article } from '../article.model';
@@ -25,13 +32,10 @@ export class ArticleCreationComponent implements OnInit, AfterViewChecked {
   topElementMedia: Media;
   showTopElement: boolean = false;
   showMediaSelector: boolean = false;
-  editorContent: string = '';
   @ViewChild('f') form: NgForm;
   @ViewChild('quillEditor') quillEditor;
   @Input() tinyTest: string;
   
-  editor;
-
   constructor(
     private articleService: ArticleService,
     private mediaService: MediaService,
@@ -95,12 +99,9 @@ export class ArticleCreationComponent implements OnInit, AfterViewChecked {
       this.article.mediaElement = this.topElementMedia;
     }
 
-    // this.article.content = this.editorContent;
-
     if (this.editMode) {
       this.articleService.updateArticle(this.id, this.article).subscribe(
         (article: any) => {
-          console.log('edited ARTICLE', article);
           this.articleService.changeArticle(this.id, article);
           this.navigateBackToTheList();
         }
@@ -116,14 +117,7 @@ export class ArticleCreationComponent implements OnInit, AfterViewChecked {
   }
 
   onCancel() {
-    // this.messagingService.warning('Leave Route', 'Do you really want to leave the route?')
-    //   .then(() => this.navigateBackToTheList())
-    //   .catch(() => null);
     this.navigateBackToTheList();
-  }
-
-  onEditorChanged(content: string) {
-    this.editorContent = content;
   }
 
   onChangeTopElement() {
@@ -148,13 +142,11 @@ export class ArticleCreationComponent implements OnInit, AfterViewChecked {
   }
 
   onUploadStarted() {
-    console.log('--- UPLOAD HAS STARTED ---');
     this.article.mediaElement = {};
     this.showTopElement = true;
   }
 
   onUploadDone(uploadedMedia: Media) {
-    console.log('--- UPLOAD IS DONE ---', uploadedMedia);
     this.topElementMedia = uploadedMedia;
   }
 

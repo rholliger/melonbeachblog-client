@@ -1,4 +1,5 @@
-import { Component, OnInit, Input, OnDestroy } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+
 import { ListService } from "../list.service";
 import { MessagingService } from "../../../core/messaging.service";
 

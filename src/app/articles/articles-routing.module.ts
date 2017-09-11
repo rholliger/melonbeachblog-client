@@ -1,11 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { ArticlesComponent } from './articles.component';
 import { ArticlesListComponent } from './articles-list/articles-list.component';
 import { ArticleCreationComponent } from './article-creation/article-creation.component';
 import { ArticleTestGuard } from './article-test-guard.service';
-import { AuthGuard } from "../auth/auth.guard";
 
 const articlesRoutes: Routes = [
     { path: '', component: ArticlesListComponent },

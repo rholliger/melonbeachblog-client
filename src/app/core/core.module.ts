@@ -8,7 +8,6 @@ import { HomeComponent } from './home/home.component';
 import { MessagingService } from './messaging.service';
 import { SharedModule } from '../shared/shared.module';
 import { AuthModule } from "../auth/auth.module";
-import { NotFoundComponent } from './not-found/not-found.component';
 import { CoreRoutingModule } from "./core-routing.module";
 
 @NgModule({

@@ -1,4 +1,4 @@
-<li [style.background-image]="'url(http://localhost:3000/uploads/' + media.fileName + ')'">
+<li [style.background-image]="'url(' + media.url + ')'">
   <a (click)="onClickOnMediaItem($event)"></a>
   <div class="name">{{ media.fileName }}</div>
 </li>

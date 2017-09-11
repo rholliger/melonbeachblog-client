@@ -3,7 +3,6 @@ import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
 
 import { LoginComponent } from "./login/login.component";
-import { AuthService } from "./auth.service";
 
 @NgModule({
     imports: [
@@ -13,7 +12,6 @@ import { AuthService } from "./auth.service";
     declarations: [
         LoginComponent
     ],
-    providers: [AuthService],
     exports: [
         LoginComponent
     ]

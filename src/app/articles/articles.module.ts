@@ -7,8 +7,8 @@ import { QuillModule } from 'ngx-quill';
 import { ArticlesComponent } from './articles.component';
 import { ArticlesRoutingModule } from './articles-routing.module';
 import { ArticlesListComponent } from './articles-list/articles-list.component';
-import { ArticleService } from './article.service';
 import { ArticleCreationComponent } from './article-creation/article-creation.component';
+import { ArticleService } from './article.service';
 import { ArticleTestGuard } from './article-test-guard.service';
 import { SharedModule } from "../shared/shared.module";
 
@@ -25,7 +25,6 @@ import { SharedModule } from "../shared/shared.module";
         ArticlesListComponent,
         ArticleCreationComponent
     ],
-    providers: [ArticleService, ArticleTestGuard],
-    exports: []
+    providers: [ArticleService, ArticleTestGuard]
 })
 export class ArticlesModule {}

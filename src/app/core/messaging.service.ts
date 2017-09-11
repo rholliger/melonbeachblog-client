@@ -1,5 +1,4 @@
 import swal from 'sweetalert2';
-import { Subject } from "rxjs/Subject";
 
 export class MessagingService {
     private messageData: object = {
@@ -10,15 +9,6 @@ export class MessagingService {
         buttonsStyling: false,
         customClass: 'alert'
     }
-
-    // private showMessage(type: string, title: string, message: string) {
-    //     const data = Object.assign(this.messageData, {
-    //         title: title,
-    //         text: message,
-    //         type: type
-    //     });
-    //     return swal(data);
-    // };
 
     warning(title: string, message: string): Promise<any> {
         this.messageData = Object.assign(this.messageData, {

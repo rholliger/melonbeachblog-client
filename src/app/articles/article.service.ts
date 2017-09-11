@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Article } from './article.model';
+
 import { Subject } from "rxjs/Subject";
+
 import { environment as config } from '../../environments/environment';
+
+import { Article } from './article.model';
 import { HttpClient } from "../shared/http-client.service";
 
 @Injectable()
@@ -56,7 +59,7 @@ export class ArticleService {
     /* -- API Methods -- */
 
     fetchArticles() {
-        this.httpClient.get(`/${this.entity}`, { error: true }).subscribe(
+        this.httpClient.get(`/${this.entity}`).subscribe(
             (articles: any) => {
                 this.articles = articles;
                 this.articlesChanged.next(this.articles.slice());

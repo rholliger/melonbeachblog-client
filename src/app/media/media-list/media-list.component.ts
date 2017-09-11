@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Subscription } from "rxjs/Subscription";
+
+import { Subject } from "rxjs/Subject";
 
 import { ListService } from "../../shared/list/list.service";
 import { MediaService } from "../media.service";
@@ -12,8 +13,9 @@ import { Media } from "../media.model";
 })
 export class MediaListComponent implements OnInit, OnDestroy {
   media: Media[] = [];
-  clickedDeleteSubscription: Subscription;
   isMediaListLoading: boolean = true;
+
+  private ngUnsubscribe: Subject<void> = new Subject<void>();
 
   constructor(private mediaService: MediaService, private listService: ListService) { }
 
@@ -25,19 +27,24 @@ export class MediaListComponent implements OnInit, OnDestroy {
       this.mediaService.fetchMedia();
     }
 
-    this.mediaService.mediaChanged.subscribe(
-      (media: Media[]) => {
-        this.isMediaListLoading = false;
-        this.media = media;
-      }
-    )
+    this.mediaService.mediaChanged
+      .takeUntil(this.ngUnsubscribe)
+      .subscribe(
+        (media: Media[]) => {
+          this.isMediaListLoading = false;
+          this.media = media;
+        }
+      )
 
-    this.clickedDeleteSubscription = this.listService.clickedDeleteButton.subscribe(
-      (id: string) => this.mediaService.deleteMedia(id)
-    )
+    this.listService.clickedDeleteButton
+      .takeUntil(this.ngUnsubscribe)
+      .subscribe(
+        (id: string) => this.mediaService.deleteMedia(id)
+      )
   }
 
   ngOnDestroy() {
-    this.clickedDeleteSubscription.unsubscribe();
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 }

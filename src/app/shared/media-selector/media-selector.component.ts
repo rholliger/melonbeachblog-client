@@ -1,4 +1,17 @@
-import { Component, OnInit, Renderer2, QueryList, ViewChildren, ElementRef, Output, EventEmitter, ViewChild } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Renderer2,
+  QueryList,
+  ViewChildren,
+  ElementRef,
+  Output,
+  EventEmitter,
+  ViewChild, 
+  OnDestroy} from '@angular/core';
+
+import { Subject } from "rxjs/Subject";
+
 import { Media } from "../../media/media.model";
 import { MediaService } from "../../media/media.service";
 import { MediaItemComponent } from "./media-item/media-item.component";
@@ -8,7 +21,7 @@ import { MediaItemComponent } from "./media-item/media-item.component";
   templateUrl: './media-selector.component.html',
   styleUrls: ['./media-selector.component.scss']
 })
-export class MediaSelectorComponent implements OnInit {
+export class MediaSelectorComponent implements OnInit, OnDestroy {
   mediaList: Media[] = [];
   selectedElement: Media;
   showAppButton: boolean = false;
@@ -19,17 +32,22 @@ export class MediaSelectorComponent implements OnInit {
   @ViewChildren(MediaItemComponent, { read: ElementRef }) mediaItems: QueryList<ElementRef>;
   @ViewChild('wrapper') wrapper;
 
+  private ngUnsubscribe: Subject<void> = new Subject<void>();
+
   constructor(private mediaService: MediaService, private renderer: Renderer2) { }
 
   ngOnInit() {
     this.mediaService.fetchMedia();
 
-    this.mediaService.mediaChanged.subscribe(
-      (mediaList: Media[]) => {
-        this.mediaList = mediaList;
-      }
+    this.mediaService.mediaChanged
+      .takeUntil(this.ngUnsubscribe)
+      .subscribe(
+        (mediaList: Media[]) => {
+          this.mediaList = mediaList;
+        }
     );
 
+    // Toggle the scroll of the underlying window
     this.toggleScroll();
   }
 
@@ -62,4 +80,8 @@ export class MediaSelectorComponent implements OnInit {
     this.renderer.setStyle(document.body, 'overflow', this.overflowStyle);
   }
 
+  ngOnDestroy() {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
+  }
 }

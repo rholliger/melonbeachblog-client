@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from "@angular/forms";
-import { Http } from "@angular/http";
 import { ActivatedRoute, Router } from "@angular/router";
 
 import { MediaService } from "../media.service";
@@ -16,7 +15,6 @@ export class MediaUploadComponent implements OnInit {
   isDraggedOver: boolean = false;
 
   constructor(
-    private http: Http,
     private router: Router,
     private route: ActivatedRoute,
     private mediaService: MediaService) { }

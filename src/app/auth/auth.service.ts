@@ -29,7 +29,7 @@ export class AuthService {
     }
 
     logout() {
-        localStorage.removeItem('user-token');
+        this.tokenService.removeAuthToken();
         this.router.navigate(['/login']);
     }
 }

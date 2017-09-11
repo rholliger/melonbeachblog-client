@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 
 import { Subject } from "rxjs/Subject";
+
 import { environment as config } from '../../environments/environment';
 
 import { Media } from "./media.model";
@@ -23,6 +24,7 @@ export class MediaService {
     }
 
     addMedia(media: Media) {
+        if (!this.media) this.media = [];
         this.media.unshift(media);
         this.mediaChanged.next(this.media.slice());
     }
