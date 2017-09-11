@@ -4,6 +4,7 @@ import { Observable } from "rxjs/Rx";
 import { NotificationsService } from "angular2-notifications";
 
 import { environment as config } from '../../environments/environment';
+import { TokenService } from "../auth/token.service";
 
 interface AppOptions {
     showErrors: boolean
@@ -11,7 +12,10 @@ interface AppOptions {
 
 @Injectable()
 export class HttpClient {
-    constructor(private http: Http, private notificationsService: NotificationsService) {}
+    constructor(
+        private http: Http,
+        private notificationsService: NotificationsService,
+        private tokenService: TokenService) {}
 
     appOptionDefaults: AppOptions = {
         showErrors: true
@@ -64,12 +68,13 @@ export class HttpClient {
     }
 
     private showError(status: string, statusText: string, body: string) {
+        console.log('showError', status, statusText, body);
         this.notificationsService.error(`${status}: ${statusText}`, JSON.parse(body).message);
     }
 
     private setAuthHeaders() {
         const headers = new Headers();
-        headers.append('Authorization', `Bearer ${JSON.parse(localStorage.getItem('user-token'))}`);
+        headers.append('Authorization', `Bearer ${this.tokenService.getAuthToken()}`);
         const options = new RequestOptions({
             headers: headers
         });

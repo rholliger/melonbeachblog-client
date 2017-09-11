@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { SimpleNotificationsModule, NotificationsService } from 'angular2-notifications';
 
 import { HeaderComponent } from './header/header.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
@@ -16,6 +17,7 @@ import { CoreRoutingModule } from "./core-routing.module";
     SharedModule,
     AuthModule,
     CoreRoutingModule,
+    SimpleNotificationsModule.forRoot()
   ],
   declarations: [
     HeaderComponent,
