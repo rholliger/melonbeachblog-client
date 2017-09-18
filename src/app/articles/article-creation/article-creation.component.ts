@@ -68,7 +68,7 @@ export class ArticleCreationComponent implements OnInit, AfterViewChecked {
         }
       );
     } else {
-      this.article = new Article('', '', '', '');
+      this.article = new Article('', '', '', '', '');
     }
   }
 

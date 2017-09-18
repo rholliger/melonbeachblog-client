@@ -48,7 +48,7 @@
       placeholder="Enter a slug"
       [(ngModel)]="article.slug">
 
-     <label for="category">Category</label>
+    <label for="category">Category</label>
     <select
       id="category"
       name="category"
@@ -61,20 +61,34 @@
     </select> 
 
     <label for="content">Content</label>
-     <quill-editor
+    <quill-editor
       name="content"
       [(ngModel)]="article.content"
       [modules]="{
         toolbar: [
           ['bold', 'italic', 'underline'],
           [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+          [{ 'header': [2, 3, false] }],
           [{ 'align': [] }]
-        ]
+        ],
+        clipboard: {
+          matchVisual: false
+        }
       }"
-      [style]="{ height: '250px' }"
+      [style]="{ height: '400px' }"
       required
       #quillEditor
     ></quill-editor>
+
+    <label for="description">Meta-Description</label>
+    <textarea
+      type="text"
+      id="description"
+      name="description"
+      placeholder="Enter a description for SEO"
+      [(ngModel)]="article.description"
+      required>
+    </textarea>
 
     <div class="button-group pull-right">
       <input type="button" class="button cancel" value="Cancel" (click)="onCancel()">

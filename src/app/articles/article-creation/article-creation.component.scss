@@ -4,6 +4,8 @@
     form {
         quill-editor {
             display: block;
+            // TODO: Create a spacing sass file
+            margin-bottom: 20px;
         }
 
         .ng-invalid.ng-touched {

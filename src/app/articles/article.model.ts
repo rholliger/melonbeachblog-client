@@ -6,6 +6,7 @@ export class Article {
     public slug: string;
     public category: string;
     public content: string;
+    public description: string;
     public createdDate: Date;
     public active: boolean;
     public mediaElement: any;
@@ -15,12 +16,14 @@ export class Article {
         slug: string,
         category: string,
         content: string,
+        description: string,
         active?: boolean
     ) {
         this.title = title;
         this.slug = slug;
         this.category = category;
         this.content = content;
+        this.description = description;
         this.active = active;
     }
 }

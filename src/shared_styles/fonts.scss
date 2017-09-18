@@ -1,4 +1,11 @@
+@import "mixins";
 @import url('https://fonts.googleapis.com/css?family=Montserrat:500|Muli:300,400,600,700');
+
+@include font-face('Oswald-Regular', '/assets/fonts/Oswald-Regular');
+@include font-face('Palanquin-Bold', '/assets/fonts/Palanquin-Bold');
+@include font-face('Palanquin-Semibold', '/assets/fonts/Palanquin-Semibold');
+@include font-face('Palanquin-Regular', '/assets/fonts/Palanquin-Regular');
+@include font-face('Palanquin-Light', '/assets/fonts/Palanquin-Light');
 
 h1 {
     font-family: 'Montserrat', sans-serif;
@@ -23,6 +30,39 @@ label {
 }
 
 /* External */
+
+// Quill Editor
+.ql-editor {
+    h2, h3 {
+        font-family: 'Oswald-Regular';
+    }
+
+    h2 {
+        font-size: 26px;
+    }
+
+    h3 {
+        font-size: 20px;
+    }
+
+    p, ul, ol {
+        font-family: 'Palanquin-Light', sans-serif;
+        font-weight: normal;
+        font-size: 14px;
+        color: #666666;
+        line-height: 1.4em;
+
+        b, strong {
+            font-family: 'Palanquin-Semibold';
+            font-weight: normal;
+        }
+    }
+
+    li::before {
+        width: auto;
+
+    }
+}
 
 .alert {
     .swal2-title {
