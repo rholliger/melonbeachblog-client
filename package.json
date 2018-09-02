@@ -9,7 +9,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "deploy": "ng build --prod && scp -r ./dist/* mbm@139.59.146.243:/opt/melonbeachblog-client"
+    "deploy": "ng build --prod && scp -r ./dist/* mbm@139.59.146.243:/opt/melonbeachblog-demo-client"
   },
   "private": true,
   "dependencies": {

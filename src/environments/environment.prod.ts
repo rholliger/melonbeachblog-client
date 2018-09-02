@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'http://blog.melonbeach.com/api'
+  apiUrl: 'http://demo.melonbeach.com/api'
 };
